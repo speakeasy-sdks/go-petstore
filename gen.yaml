@@ -1,4 +1,9 @@
 configVersion: 1.0.0
+management:
+  docChecksum: 2554149823bfd7b4f9664a81d29a1aea
+  docVersion: "1.0"
+  speakeasyVersion: 1.64.1
+  generationVersion: 2.71.0
 generation:
   comments:
     disableComments: false
@@ -8,6 +13,6 @@ generation:
   singleTagPerOp: false
   tagNamespacingDisabled: false
 go:
-  version: 0.0.1
+  version: 1.0.0
   maxMethodParams: 0
   packageName: PB

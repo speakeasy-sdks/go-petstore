@@ -1,0 +1,11 @@
+# ComplexObjectData
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Animal`                                                                             | [][Animals](../../models/shared/animals.md)                                          | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Birds`                                                                              | [*ComplexObjectDataBirds](../../models/shared/complexobjectdatabirds.md)             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `CreatedDate`                                                                        | [*ComplexObjectDataCreatedDate](../../models/shared/complexobjectdatacreateddate.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `UpdatedDate`                                                                        | *interface{}*                                                                        | :heavy_minus_sign:                                                                   | N/A                                                                                  |
