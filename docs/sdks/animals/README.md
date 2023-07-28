@@ -32,6 +32,9 @@ import(
 
 func main() {
     s := pb.New()
+    operationSecurity := operations.CreateAnimalSecurity{
+            Key1: "",
+        }
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
@@ -39,9 +42,7 @@ func main() {
         Color: "at",
         ID: "f7cc78ca-1ba9-428f-8816-742cb7392059",
         Name: "Sheryl Fadel",
-    }, operations.CreateAnimalSecurity{
-        Key1: "",
-    })
+    }, operationSecurity)
     if err != nil {
         log.Fatal(err)
     }
@@ -313,6 +314,9 @@ import(
 
 func main() {
     s := pb.New()
+    operationSecurity := operations.GetAnimalsByIDSecurity{
+            Key1: "",
+        }
 
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
@@ -324,9 +328,7 @@ func main() {
         },
         ID: "3f9b77f3-a410-4067-8ebf-69280d1ba77a",
         PerPage: pb.Int64(536579),
-    }, operations.GetAnimalsByIDSecurity{
-        Key1: "",
-    })
+    }, operationSecurity)
     if err != nil {
         log.Fatal(err)
     }
@@ -370,6 +372,9 @@ import(
 
 func main() {
     s := pb.New()
+    operationSecurity := operations.UpdateAnimalsByIDSecurity{
+            Key1: "",
+        }
 
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{
@@ -380,9 +385,7 @@ func main() {
             Name: pb.String("Cory Pfeffer"),
         },
         ID: "cf3be453-f870-4b32-ab5a-73429cdb1a84",
-    }, operations.UpdateAnimalsByIDSecurity{
-        Key1: "",
-    })
+    }, operationSecurity)
     if err != nil {
         log.Fatal(err)
     }
