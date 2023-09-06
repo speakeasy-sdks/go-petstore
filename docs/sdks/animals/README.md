@@ -91,43 +91,24 @@ func main() {
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
                 shared.Animals{
-                    Age: pb.Int64(902599),
-                    Color: pb.String("fuga"),
-                    ID: pb.String("7596eb10-faaa-4235-ac59-55907aff1a3a"),
-                    Name: pb.String("Jaime O'Hara"),
-                },
-                shared.Animals{
-                    Age: pb.Int64(414369),
-                    Color: pb.String("quam"),
-                    ID: pb.String("739251aa-52c3-4f5a-9019-da1ffe78f097"),
-                    Name: pb.String("Thomas Batz"),
-                },
-                shared.Animals{
-                    Age: pb.Int64(979587),
-                    Color: pb.String("dicta"),
-                    ID: pb.String("5471b5e6-e13b-499d-888e-1e91e450ad2a"),
-                    Name: pb.String("Marty Green"),
-                },
-                shared.Animals{
-                    Age: pb.Int64(397821),
-                    Color: pb.String("cupiditate"),
-                    ID: pb.String("802d502a-94bb-44f6-bc96-9e9a3efa77df"),
-                    Name: pb.String("Keith Gulgowski"),
+                    Age: pb.Int64(943749),
+                    Color: pb.String("saepe"),
+                    ID: pb.String("a7596eb1-0faa-4a23-92c5-955907aff1a3"),
+                    Name: pb.String("Carlos Ziemann"),
                 },
             },
             Birds: &shared.ComplexObjectDataBirds{
                 Food: []string{
-                    "aliquid",
-                    "laborum",
+                    "numquam",
                 },
-                ID: "e395efb9-ba88-4f3a-a699-7074ba4469b6",
-                Name: "Brandon Brakus V",
+                ID: "67739251-aa52-4c3f-9ad0-19da1ffe78f0",
+                Name: "Mr. Jared Ritchie",
             },
             CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: pb.Int64(590873),
+            UpdatedDate: pb.Int64(979587),
         },
         Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("Kirk Bartoletti"),
+        Name: pb.String("Stacy Gulgowski MD"),
     })
     if err != nil {
         log.Fatal(err)
@@ -173,7 +154,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.DeleteAnimalsByID(ctx, operations.DeleteAnimalsByIDRequest{
-        ID: "a563e251-6fe4-4c8b-b11e-5b7fd2ed0289",
+        ID: "5e6e13b9-9d48-48e1-a91e-450ad2abd442",
     })
     if err != nil {
         log.Fatal(err)
@@ -219,10 +200,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.GetAllAnimals(ctx, operations.GetAllAnimalsRequest{
-        Age: pb.String("magni"),
-        Color: pb.String("sunt"),
-        ID: pb.String("cddc6926-01fb-4576-b0d5-f0d30c5fbb25"),
-        Name: pb.String("Lance Becker"),
+        Age: pb.String("aliquid"),
+        Color: pb.String("cupiditate"),
+        ID: pb.String("802d502a-94bb-44f6-bc96-9e9a3efa77df"),
+        Name: pb.String("Keith Gulgowski"),
     })
     if err != nil {
         log.Fatal(err)
@@ -269,7 +250,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
         Filter: []interface{}{
-            "perferendis",
+            "ea",
         },
     })
     if err != nil {
@@ -321,13 +302,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
         Animals: &shared.Animals{
-            Age: pb.Int64(170986),
-            Color: pb.String("minus"),
-            ID: pb.String("73d5fe9b-90c2-4890-9b3f-e49a8d9cbf48"),
-            Name: pb.String("Florence Ebert"),
+            Age: pb.Int64(396506),
+            Color: pb.String("laborum"),
+            ID: pb.String("e395efb9-ba88-4f3a-a699-7074ba4469b6"),
+            Name: pb.String("Brandon Brakus V"),
         },
-        ID: "3f9b77f3-a410-4067-8ebf-69280d1ba77a",
-        PerPage: pb.Int64(536579),
+        ID: "59890afa-563e-4251-afe4-c8b711e5b7fd",
+        PerPage: pb.Int64(149448),
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -379,12 +360,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{
         Animals: &shared.Animals{
-            Age: pb.Int64(607045),
-            Color: pb.String("necessitatibus"),
-            ID: pb.String("bf737ae4-203c-4e5e-aa95-d8a0d446ce2a"),
-            Name: pb.String("Cory Pfeffer"),
+            Age: pb.Int64(904648),
+            Color: pb.String("pariatur"),
+            ID: pb.String("028921cd-dc69-4260-9fb5-76b0d5f0d30c"),
+            Name: pb.String("Mindy Renner"),
         },
-        ID: "cf3be453-f870-4b32-ab5a-73429cdb1a84",
+        ID: "58705320-2c73-4d5f-a9b9-0c28909b3fe4",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)

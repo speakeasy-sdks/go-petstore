@@ -35,27 +35,24 @@ func main() {
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
                 shared.Animals{
-                    Age: pb.Int64(174909),
-                    Color: pb.String("distinctio"),
-                    ID: pb.String("b679d232-2715-4bf0-8bb1-e31b8b90f344"),
-                    Name: pb.String("Mr. Sonya Bradtke"),
+                    Age: pb.Int64(613966),
+                    Color: pb.String("dolorum"),
+                    ID: pb.String("8d9cbf48-6333-423f-9b77-f3a4100674eb"),
+                    Name: pb.String("Hector Mosciski"),
                 },
             },
             Birds: &shared.ComplexObjectDataBirds{
                 Food: []string{
-                    "consequatur",
-                    "est",
-                    "repellendus",
-                    "porro",
+                    "sit",
                 },
-                ID: "f4b92187-9fce-4953-b73e-f7fbc7abd74d",
-                Name: "Earl Mosciski DVM",
+                ID: "d1ba77a8-9ebf-4737-ae42-03ce5e6a95d8",
+                Name: "James Swaniawski",
             },
             CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: pb.Int64(862310),
+            UpdatedDate: pb.Int64(798047),
         },
         Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("Johnnie Wunsch"),
+        Name: pb.String("Clarence Parisian"),
     })
     if err != nil {
         log.Fatal(err)
@@ -102,33 +99,32 @@ func main() {
     ctx := context.Background()
     res, err := s.Birds.CreateNewBird(ctx, shared.NestedBird{
         Age: &shared.NestedBirdAge{
-            Amount: pb.Float64(7535.7),
+            Amount: pb.Float64(6874.88),
             Unit: shared.NestedBirdAgeUnitYears,
         },
         Flight: &shared.NestedBirdFlight{
             CanFly: pb.Bool(false),
             Wings: &shared.NestedBirdFlightWings{
-                Count: pb.Int64(4048),
+                Count: pb.Int64(215507),
                 Span: &shared.NestedBirdFlightWingsSpan{
-                    Amount: pb.Float64(6394.73),
-                    Unit: pb.String("tempora"),
+                    Amount: pb.Float64(7887.4),
+                    Unit: pb.String("tenetur"),
                 },
             },
         },
         Food: []string{
-            "ea",
-            "aspernatur",
+            "amet",
         },
-        ID: pb.String("6d436813-f16d-49f5-bce6-c556146c3e25"),
+        ID: pb.String("be453f87-0b32-46b5-a734-29cdb1a8422b"),
         Location: []shared.NestedBirdLocation{
             shared.NestedBirdLocation{
                 Geography: &shared.NestedBirdLocationGeography{
-                    Latitude: pb.String("a"),
-                    Longitutde: pb.String("libero"),
+                    Latitude: pb.String("facilis"),
+                    Longitutde: pb.String("aliquid"),
                 },
             },
         },
-        Name: pb.String("Jennifer Lesch"),
+        Name: pb.String("Felicia Spencer"),
     })
     if err != nil {
         log.Fatal(err)
@@ -176,9 +172,9 @@ func main() {
     res, err := s.Birds.GetAllBirds(ctx, []shared.Birds{
         shared.Birds{
             CanFly: pb.Bool(false),
-            ID: pb.String("e141aac3-66c8-4dd6-b144-2907474778a7"),
-            Name: pb.String("Nicolas Graham"),
-            WingSpan: pb.Int64(826871),
+            ID: pb.String("22715bf0-cbb1-4e31-b8b9-0f3443a1108e"),
+            Name: pb.String("Jodi Skiles"),
+            WingSpan: pb.Int64(281730),
         },
     })
     if err != nil {
@@ -226,7 +222,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Birds.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
         Filter: []interface{}{
-            "praesentium",
+            "facilis",
         },
     })
     if err != nil {
