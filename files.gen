@@ -69,10 +69,9 @@ docs/models/shared/animals.md
 docs/models/shared/complexobjectdatabirds.md
 docs/models/shared/complexobjectdatacreateddate.md
 docs/models/shared/complexobjectdata.md
-docs/models/shared/complexobjectmeta2.md
+docs/models/shared/pagination.md
 docs/models/shared/complexobjectmeta.md
 docs/models/shared/complexobject.md
-docs/models/shared/pagination.md
 docs/models/shared/birds.md
 docs/models/shared/nestedbirdageunit.md
 docs/models/shared/nestedbirdage.md

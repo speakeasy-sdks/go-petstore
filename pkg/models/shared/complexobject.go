@@ -184,15 +184,6 @@ func CreateComplexObjectMetaComplexObjectMeta2(complexObjectMeta2 ComplexObjectM
 func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
 	var d *json.Decoder
 
-	pagination := new(Pagination)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&pagination); err == nil {
-		u.Pagination = pagination
-		u.Type = ComplexObjectMetaTypePagination
-		return nil
-	}
-
 	complexObjectMeta2 := new(ComplexObjectMeta2)
 	d = json.NewDecoder(bytes.NewReader(data))
 	d.DisallowUnknownFields()
@@ -202,16 +193,25 @@ func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	pagination := new(Pagination)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&pagination); err == nil {
+		u.Pagination = pagination
+		u.Type = ComplexObjectMetaTypePagination
+		return nil
+	}
+
 	return errors.New("could not unmarshal into supported union types")
 }
 
 func (u ComplexObjectMeta) MarshalJSON() ([]byte, error) {
-	if u.Pagination != nil {
-		return json.Marshal(u.Pagination)
-	}
-
 	if u.ComplexObjectMeta2 != nil {
 		return json.Marshal(u.ComplexObjectMeta2)
+	}
+
+	if u.Pagination != nil {
+		return json.Marshal(u.Pagination)
 	}
 
 	return nil, nil

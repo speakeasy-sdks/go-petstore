@@ -63,9 +63,9 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // Pb - Petstore: REST API for interfacing with Petstore.
 // An Example Petstore API
 type Pb struct {
-	// Animals - Work with Animals.
+	// Work with Animals.
 	Animals *animals
-	// Birds - Birds information.
+	// Birds information.
 	Birds *birds
 
 	sdkConfiguration sdkConfiguration
@@ -115,8 +115,8 @@ func New(opts ...SDKOption) *Pb {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "1.3.0",
-			GenVersion:        "2.96.9",
+			SDKVersion:        "1.4.0",
+			GenVersion:        "2.101.0",
 		},
 	}
 	for _, opt := range opts {
