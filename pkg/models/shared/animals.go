@@ -2,7 +2,6 @@
 
 package shared
 
-// Animals - OK
 type Animals struct {
 	Age   *int64  `json:"age,omitempty"`
 	Color *string `json:"color,omitempty"`
