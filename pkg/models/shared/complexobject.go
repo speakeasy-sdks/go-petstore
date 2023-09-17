@@ -100,7 +100,8 @@ func (u ComplexObjectDataCreatedDate) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.Str)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type ComplexObjectData struct {
@@ -214,7 +215,8 @@ func (u ComplexObjectMeta) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.Pagination)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type ComplexObject struct {

@@ -30,8 +30,8 @@ pkg/models/shared/error.go
 pkg/models/shared/animals.go
 pkg/models/shared/complexobject.go
 pkg/models/shared/pagination.go
-pkg/models/shared/birds.go
 pkg/models/shared/nestedbird.go
+pkg/models/shared/birds.go
 docs/sdks/pb/README.md
 docs/sdks/animals/README.md
 docs/sdks/birds/README.md
@@ -45,14 +45,6 @@ docs/models/operations/deleteanimalsbyidresponse.md
 docs/models/operations/getallanimalsrequest.md
 docs/models/operations/getallanimalsresponse.md
 docs/models/operations/getalllivingthingsrequest.md
-docs/models/operations/getalllivingthings200applicationjson2meta2pagination.md
-docs/models/operations/getalllivingthings200applicationjson2meta2.md
-docs/models/operations/getalllivingthings200applicationjson2meta1.md
-docs/models/operations/getalllivingthings200applicationjson2meta.md
-docs/models/operations/getalllivingthings200applicationjson2.md
-docs/models/operations/getalllivingthings200applicationjson1metapagination.md
-docs/models/operations/getalllivingthings200applicationjson1meta.md
-docs/models/operations/getalllivingthings200applicationjson1.md
 docs/models/operations/getalllivingthings200applicationjson.md
 docs/models/operations/getalllivingthingsresponse.md
 docs/models/operations/getanimalsbyidsecurity.md
@@ -73,7 +65,6 @@ docs/models/shared/complexobjectdata.md
 docs/models/shared/pagination.md
 docs/models/shared/complexobjectmeta.md
 docs/models/shared/complexobject.md
-docs/models/shared/birds.md
 docs/models/shared/nestedbirdageunit.md
 docs/models/shared/nestedbirdage.md
 docs/models/shared/nestedbirdflightwingsspan.md
@@ -82,4 +73,5 @@ docs/models/shared/nestedbirdflight.md
 docs/models/shared/nestedbirdlocationgeography.md
 docs/models/shared/nestedbirdlocation.md
 docs/models/shared/nestedbird.md
+docs/models/shared/birds.md
 .gitattributes
