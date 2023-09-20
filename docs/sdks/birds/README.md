@@ -28,17 +28,17 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Birds.CreateLivingThings(ctx, shared.ComplexObject{
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
                 shared.Animals{
-                    Age: pb.Int64(613966),
-                    Color: pb.String("dolorum"),
-                    ID: pb.String("8d9cbf48-6333-423f-9b77-f3a4100674eb"),
-                    Name: pb.String("Hector Mosciski"),
+                    Age: PB.Int64(613966),
+                    Color: PB.String("dolorum"),
+                    ID: PB.String("8d9cbf48-6333-423f-9b77-f3a4100674eb"),
+                    Name: PB.String("Hector Mosciski"),
                 },
             },
             Birds: &shared.ComplexObjectDataBirds{
@@ -49,10 +49,10 @@ func main() {
                 Name: "James Swaniawski",
             },
             CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: pb.Int64(798047),
+            UpdatedDate: PB.Int64(798047),
         },
         Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("Clarence Parisian"),
+        Name: PB.String("Clarence Parisian"),
     })
     if err != nil {
         log.Fatal(err)
@@ -94,37 +94,37 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Birds.CreateNewBird(ctx, shared.NestedBird{
         Age: &shared.NestedBirdAge{
-            Amount: pb.Float64(6874.88),
+            Amount: PB.Float64(6874.88),
             Unit: shared.NestedBirdAgeUnitYears,
         },
         Flight: &shared.NestedBirdFlight{
-            CanFly: pb.Bool(false),
+            CanFly: PB.Bool(false),
             Wings: &shared.NestedBirdFlightWings{
-                Count: pb.Int64(215507),
+                Count: PB.Int64(215507),
                 Span: &shared.NestedBirdFlightWingsSpan{
-                    Amount: pb.Float64(7887.4),
-                    Unit: pb.String("tenetur"),
+                    Amount: PB.Float64(7887.4),
+                    Unit: PB.String("tenetur"),
                 },
             },
         },
         Food: []string{
             "amet",
         },
-        ID: pb.String("be453f87-0b32-46b5-a734-29cdb1a8422b"),
+        ID: PB.String("be453f87-0b32-46b5-a734-29cdb1a8422b"),
         Location: []shared.NestedBirdLocation{
             shared.NestedBirdLocation{
                 Geography: &shared.NestedBirdLocationGeography{
-                    Latitude: pb.String("facilis"),
-                    Longitutde: pb.String("aliquid"),
+                    Latitude: PB.String("facilis"),
+                    Longitutde: PB.String("aliquid"),
                 },
             },
         },
-        Name: pb.String("Felicia Spencer"),
+        Name: PB.String("Felicia Spencer"),
     })
     if err != nil {
         log.Fatal(err)
@@ -166,15 +166,15 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Birds.GetAllBirds(ctx, []shared.Birds{
         shared.Birds{
-            CanFly: pb.Bool(false),
-            ID: pb.String("22715bf0-cbb1-4e31-b8b9-0f3443a1108e"),
-            Name: pb.String("Jodi Skiles"),
-            WingSpan: pb.Int64(281730),
+            CanFly: PB.Bool(false),
+            ID: PB.String("22715bf0-cbb1-4e31-b8b9-0f3443a1108e"),
+            Name: PB.String("Jodi Skiles"),
+            WingSpan: PB.Int64(281730),
         },
     })
     if err != nil {
@@ -217,7 +217,7 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Birds.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
