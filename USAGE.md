@@ -12,14 +12,14 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
     operationSecurity := operations.CreateAnimalSecurity{
             Key1: "",
         }
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
-        Age: pb.Int64(548814),
+        Age: PB.Int64(548814),
         Color: "provident",
         ID: "bd9d8d69-a674-4e0f-867c-c8796ed151a0",
         Name: "Estelle Will",

@@ -3,8 +3,7 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
+	"PB/pkg/utils"
 	"errors"
 )
 
@@ -68,21 +67,16 @@ func CreateComplexObjectDataCreatedDateStr(str string) ComplexObjectDataCreatedD
 }
 
 func (u *ComplexObjectDataCreatedDate) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	integer := new(int64)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&integer); err == nil {
+	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
 		u.Integer = integer
 		u.Type = ComplexObjectDataCreatedDateTypeInteger
 		return nil
 	}
 
 	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = str
 		u.Type = ComplexObjectDataCreatedDateTypeStr
 		return nil
@@ -93,14 +87,14 @@ func (u *ComplexObjectDataCreatedDate) UnmarshalJSON(data []byte) error {
 
 func (u ComplexObjectDataCreatedDate) MarshalJSON() ([]byte, error) {
 	if u.Integer != nil {
-		return json.Marshal(u.Integer)
+		return utils.MarshalJSON(u.Integer, "", true)
 	}
 
 	if u.Str != nil {
-		return json.Marshal(u.Str)
+		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ComplexObjectData struct {
@@ -182,21 +176,16 @@ func CreateComplexObjectMetaComplexObjectMeta2(complexObjectMeta2 ComplexObjectM
 }
 
 func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	complexObjectMeta2 := new(ComplexObjectMeta2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&complexObjectMeta2); err == nil {
+	if err := utils.UnmarshalJSON(data, &complexObjectMeta2, "", true, true); err == nil {
 		u.ComplexObjectMeta2 = complexObjectMeta2
 		u.Type = ComplexObjectMetaTypeComplexObjectMeta2
 		return nil
 	}
 
 	pagination := new(Pagination)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&pagination); err == nil {
+	if err := utils.UnmarshalJSON(data, &pagination, "", true, true); err == nil {
 		u.Pagination = pagination
 		u.Type = ComplexObjectMetaTypePagination
 		return nil
@@ -207,14 +196,14 @@ func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
 
 func (u ComplexObjectMeta) MarshalJSON() ([]byte, error) {
 	if u.ComplexObjectMeta2 != nil {
-		return json.Marshal(u.ComplexObjectMeta2)
+		return utils.MarshalJSON(u.ComplexObjectMeta2, "", true)
 	}
 
 	if u.Pagination != nil {
-		return json.Marshal(u.Pagination)
+		return utils.MarshalJSON(u.Pagination, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ComplexObject struct {
