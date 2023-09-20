@@ -31,14 +31,14 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
     operationSecurity := operations.CreateAnimalSecurity{
             Key1: "",
         }
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
-        Age: pb.Int64(870013),
+        Age: PB.Int64(870013),
         Color: "at",
         ID: "f7cc78ca-1ba9-428f-8816-742cb7392059",
         Name: "Sheryl Fadel",
@@ -84,17 +84,17 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Animals.CreateLivingThings(ctx, shared.ComplexObject{
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
                 shared.Animals{
-                    Age: pb.Int64(943749),
-                    Color: pb.String("saepe"),
-                    ID: pb.String("a7596eb1-0faa-4a23-92c5-955907aff1a3"),
-                    Name: pb.String("Carlos Ziemann"),
+                    Age: PB.Int64(943749),
+                    Color: PB.String("saepe"),
+                    ID: PB.String("a7596eb1-0faa-4a23-92c5-955907aff1a3"),
+                    Name: PB.String("Carlos Ziemann"),
                 },
             },
             Birds: &shared.ComplexObjectDataBirds{
@@ -105,10 +105,10 @@ func main() {
                 Name: "Mr. Jared Ritchie",
             },
             CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: pb.Int64(979587),
+            UpdatedDate: PB.Int64(979587),
         },
         Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("Stacy Gulgowski MD"),
+        Name: PB.String("Stacy Gulgowski MD"),
     })
     if err != nil {
         log.Fatal(err)
@@ -150,7 +150,7 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Animals.DeleteAnimalsByID(ctx, operations.DeleteAnimalsByIDRequest{
@@ -196,14 +196,14 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Animals.GetAllAnimals(ctx, operations.GetAllAnimalsRequest{
-        Age: pb.String("aliquid"),
-        Color: pb.String("cupiditate"),
-        ID: pb.String("802d502a-94bb-44f6-bc96-9e9a3efa77df"),
-        Name: pb.String("Keith Gulgowski"),
+        Age: PB.String("aliquid"),
+        Color: PB.String("cupiditate"),
+        ID: PB.String("802d502a-94bb-44f6-bc96-9e9a3efa77df"),
+        Name: PB.String("Keith Gulgowski"),
     })
     if err != nil {
         log.Fatal(err)
@@ -245,7 +245,7 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
 
     ctx := context.Background()
     res, err := s.Animals.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
@@ -294,7 +294,7 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
     operationSecurity := operations.GetAnimalsByIDSecurity{
             Key1: "",
         }
@@ -302,13 +302,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
         Animals: &shared.Animals{
-            Age: pb.Int64(396506),
-            Color: pb.String("laborum"),
-            ID: pb.String("e395efb9-ba88-4f3a-a699-7074ba4469b6"),
-            Name: pb.String("Brandon Brakus V"),
+            Age: PB.Int64(396506),
+            Color: PB.String("laborum"),
+            ID: PB.String("e395efb9-ba88-4f3a-a699-7074ba4469b6"),
+            Name: PB.String("Brandon Brakus V"),
         },
         ID: "59890afa-563e-4251-afe4-c8b711e5b7fd",
-        PerPage: pb.Int64(149448),
+        PerPage: PB.Int64(149448),
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -352,7 +352,7 @@ import(
 )
 
 func main() {
-    s := pb.New()
+    s := PB.New()
     operationSecurity := operations.UpdateAnimalsByIDSecurity{
             Key1: "",
         }
@@ -360,10 +360,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{
         Animals: &shared.Animals{
-            Age: pb.Int64(904648),
-            Color: pb.String("pariatur"),
-            ID: pb.String("028921cd-dc69-4260-9fb5-76b0d5f0d30c"),
-            Name: pb.String("Mindy Renner"),
+            Age: PB.Int64(904648),
+            Color: PB.String("pariatur"),
+            ID: PB.String("028921cd-dc69-4260-9fb5-76b0d5f0d30c"),
+            Name: PB.String("Mindy Renner"),
         },
         ID: "58705320-2c73-4d5f-a9b9-0c28909b3fe4",
     }, operationSecurity)
