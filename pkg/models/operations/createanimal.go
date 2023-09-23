@@ -7,17 +7,6 @@ import (
 	"net/http"
 )
 
-type CreateAnimalSecurity struct {
-	Key1 string `security:"scheme,type=oauth2,name=Authorization"`
-}
-
-func (o *CreateAnimalSecurity) GetKey1() string {
-	if o == nil {
-		return ""
-	}
-	return o.Key1
-}
-
 type CreateAnimalRequestBody struct {
 	Age   *int64 `json:"age,omitempty"`
 	Color string `json:"color"`
