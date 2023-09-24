@@ -7,17 +7,6 @@ import (
 	"net/http"
 )
 
-type UpdateAnimalsByIDSecurity struct {
-	Key1 string `security:"scheme,type=oauth2,name=Authorization"`
-}
-
-func (o *UpdateAnimalsByIDSecurity) GetKey1() string {
-	if o == nil {
-		return ""
-	}
-	return o.Key1
-}
-
 type UpdateAnimalsByIDRequest struct {
 	Animals *shared.Animals `request:"mediaType=application/json"`
 	ID      string          `pathParam:"style=simple,explode=false,name=id"`

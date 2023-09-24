@@ -1,8 +1,8 @@
-# GetAllLivingThings200ApplicationJSON2Meta2Pagination
+# ComplexObjectMeta2
 
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `PageNumber`       | **int64*           | :heavy_minus_sign: | N/A                |
+| `PageNumber`       | **string*          | :heavy_minus_sign: | N/A                |
