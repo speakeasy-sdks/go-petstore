@@ -9,11 +9,14 @@ import (
 
 type GetAllBirdsResponse struct {
 	// OK
-	Birds       []shared.Birds
+	Birds []shared.Birds
+	// HTTP response content type for this operation
 	ContentType string
 	// Internal Server Error
-	Error       *shared.Error
-	StatusCode  int
+	Error *shared.Error
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

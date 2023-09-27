@@ -1,4 +1,5 @@
 # Birds
+(*Birds*)
 
 ## Overview
 
@@ -23,36 +24,40 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
 	"PB/pkg/models/shared"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Birds.CreateLivingThings(ctx, shared.ComplexObject{
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
                 shared.Animals{
-                    Age: pb.Int64(613966),
-                    Color: pb.String("dolorum"),
-                    ID: pb.String("8d9cbf48-6333-423f-9b77-f3a4100674eb"),
-                    Name: pb.String("Hector Mosciski"),
+                    Age: pb.Int64(179603),
+                    Color: pb.String("atque"),
+                    ID: pb.String("0d1ba77a-89eb-4f73-bae4-203ce5e6a95d"),
+                    Name: pb.String("Donnie Abbott"),
                 },
             },
             Birds: &shared.ComplexObjectDataBirds{
                 Food: []string{
-                    "sit",
+                    "tempora",
                 },
-                ID: "d1ba77a8-9ebf-4737-ae42-03ce5e6a95d8",
-                Name: "James Swaniawski",
+                ID: "6ce2af7a-73cf-43be-853f-870b326b5a73",
+                Name: "Norma McGlynn",
             },
             CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: pb.Int64(798047),
+            UpdatedDate: &shared.ComplexObjectDataUpdatedDate{},
         },
         Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("Clarence Parisian"),
+        Name: pb.String("Keith Padberg"),
     })
     if err != nil {
         log.Fatal(err)
@@ -89,42 +94,46 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
 	"PB/pkg/models/shared"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Birds.CreateNewBird(ctx, shared.NestedBird{
         Age: &shared.NestedBirdAge{
-            Amount: pb.Float64(6874.88),
-            Unit: shared.NestedBirdAgeUnitYears,
+            Amount: pb.Float64(1320.68),
+            Unit: shared.NestedBirdAgeUnitMonths,
         },
         Flight: &shared.NestedBirdFlight{
             CanFly: pb.Bool(false),
             Wings: &shared.NestedBirdFlightWings{
-                Count: pb.Int64(215507),
+                Count: pb.Int64(716860),
                 Span: &shared.NestedBirdFlightWingsSpan{
-                    Amount: pb.Float64(7887.4),
-                    Unit: pb.String("tenetur"),
+                    Amount: pb.Float64(7044.74),
+                    Unit: pb.String("aliquid"),
                 },
             },
         },
         Food: []string{
-            "amet",
+            "quam",
         },
-        ID: pb.String("be453f87-0b32-46b5-a734-29cdb1a8422b"),
+        ID: pb.String("9d232271-5bf0-4cbb-9e31-b8b90f3443a1"),
         Location: []shared.NestedBirdLocation{
             shared.NestedBirdLocation{
                 Geography: &shared.NestedBirdLocationGeography{
-                    Latitude: pb.String("facilis"),
-                    Longitutde: pb.String("aliquid"),
+                    Latitude: pb.String("quae"),
+                    Longitutde: pb.String("aut"),
                 },
             },
         },
-        Name: pb.String("Felicia Spencer"),
+        Name: pb.String("Percy Altenwerth"),
     })
     if err != nil {
         log.Fatal(err)
@@ -161,20 +170,24 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
 	"PB/pkg/models/shared"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Birds.GetAllBirds(ctx, []shared.Birds{
         shared.Birds{
             CanFly: pb.Bool(false),
-            ID: pb.String("22715bf0-cbb1-4e31-b8b9-0f3443a1108e"),
-            Name: pb.String("Jodi Skiles"),
-            WingSpan: pb.Int64(281730),
+            ID: pb.String("cf4b9218-79fc-4e95-bf73-ef7fbc7abd74"),
+            Name: pb.String("Gilberto Dickinson"),
+            WingSpan: pb.Int64(13236),
         },
     })
     if err != nil {
@@ -212,17 +225,22 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
+	"PB/pkg/models/shared"
 	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Birds.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
         Filter: []interface{}{
-            "facilis",
+            "voluptatibus",
         },
     })
     if err != nil {
