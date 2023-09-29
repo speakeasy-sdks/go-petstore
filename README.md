@@ -10,31 +10,31 @@ go get github.com/speakeasy-sdks/go-petstore
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
+	"PB/pkg/models/shared"
 	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
-    operationSecurity := operations.CreateAnimalSecurity{
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
             Key1: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
-        Age: pb.Int64(548814),
-        Color: "provident",
-        ID: "bd9d8d69-a674-4e0f-867c-c8796ed151a0",
-        Name: "Estelle Will",
-    }, operationSecurity)
+        Age: pb.Int64(239780),
+        Color: "maroon",
+        ID: "<ID>",
+        Name: "Buckinghamshire TLS",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -67,6 +67,38 @@ func main() {
 * [GetAllBirds](docs/sdks/birds/README.md#getallbirds) - Get Birds
 * [GetAllLivingThings](docs/sdks/birds/README.md#getalllivingthings) - Get All living things
 <!-- End SDK Available Operations -->
+
+
+
+<!-- Start Dev Containers -->
+
+
+
+<!-- End Dev Containers -->
+
+
+
+<!-- Start Pagination -->
+# Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+
+
+<!-- End Pagination -->
+
+
+
+<!-- Start Go Types -->
+
+<!-- End Go Types -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 ### Maturity
 
