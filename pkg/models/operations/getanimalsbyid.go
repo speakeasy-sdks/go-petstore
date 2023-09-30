@@ -7,17 +7,6 @@ import (
 	"net/http"
 )
 
-type GetAnimalsByIDSecurity struct {
-	Key1 string `security:"scheme,type=oauth2,name=Authorization"`
-}
-
-func (o *GetAnimalsByIDSecurity) GetKey1() string {
-	if o == nil {
-		return ""
-	}
-	return o.Key1
-}
-
 type GetAnimalsByIDRequest struct {
 	Animals *shared.Animals `request:"mediaType=application/json"`
 	ID      string          `pathParam:"style=simple,explode=false,name=id"`
@@ -47,11 +36,14 @@ func (o *GetAnimalsByIDRequest) GetPerPage() *int64 {
 
 type GetAnimalsByIDResponse struct {
 	// OK
-	Animals     *shared.Animals
+	Animals *shared.Animals
+	// HTTP response content type for this operation
 	ContentType string
 	// Internal Server Error
-	Error       *shared.Error
-	StatusCode  int
+	Error *shared.Error
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

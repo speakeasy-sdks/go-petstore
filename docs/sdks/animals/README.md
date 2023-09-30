@@ -1,4 +1,5 @@
 # Animals
+(*Animals*)
 
 ## Overview
 
@@ -26,23 +27,25 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
+	"PB/pkg/models/shared"
 	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
-    operationSecurity := operations.CreateAnimalSecurity{
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
             Key1: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
-        Age: pb.Int64(870013),
-        Color: "at",
-        ID: "f7cc78ca-1ba9-428f-8816-742cb7392059",
-        Name: "Sheryl Fadel",
-    }, operationSecurity)
+        Age: pb.Int64(239780),
+        Color: "maroon",
+        ID: "<ID>",
+        Name: "Buckinghamshire TLS",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -59,7 +62,6 @@ func main() {
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `request`                                                                                | [operations.CreateAnimalRequestBody](../../models/operations/createanimalrequestbody.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-| `security`                                                                               | [operations.CreateAnimalSecurity](../../models/operations/createanimalsecurity.md)       | :heavy_check_mark:                                                                       | The security requirements to use for the request.                                        |
 
 
 ### Response
@@ -79,36 +81,40 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
 	"PB/pkg/models/shared"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.CreateLivingThings(ctx, shared.ComplexObject{
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
                 shared.Animals{
-                    Age: pb.Int64(943749),
-                    Color: pb.String("saepe"),
-                    ID: pb.String("a7596eb1-0faa-4a23-92c5-955907aff1a3"),
-                    Name: pb.String("Carlos Ziemann"),
+                    Age: pb.Int64(24488),
+                    Color: pb.String("sky blue"),
+                    ID: pb.String("<ID>"),
+                    Name: pb.String("loyalty Officer withdrawal"),
                 },
             },
             Birds: &shared.ComplexObjectDataBirds{
                 Food: []string{
-                    "numquam",
+                    "ruddy",
                 },
-                ID: "67739251-aa52-4c3f-9ad0-19da1ffe78f0",
-                Name: "Mr. Jared Ritchie",
+                ID: "<ID>",
+                Name: "Fantastic",
             },
             CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: pb.Int64(979587),
+            UpdatedDate: &shared.ComplexObjectDataUpdatedDate{},
         },
         Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("Stacy Gulgowski MD"),
+        Name: pb.String("Chicken"),
     })
     if err != nil {
         log.Fatal(err)
@@ -145,16 +151,21 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
+	"PB/pkg/models/shared"
 	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.DeleteAnimalsByID(ctx, operations.DeleteAnimalsByIDRequest{
-        ID: "5e6e13b9-9d48-48e1-a91e-450ad2abd442",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -191,19 +202,24 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
+	"PB/pkg/models/shared"
 	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.GetAllAnimals(ctx, operations.GetAllAnimalsRequest{
-        Age: pb.String("aliquid"),
-        Color: pb.String("cupiditate"),
-        ID: pb.String("802d502a-94bb-44f6-bc96-9e9a3efa77df"),
-        Name: pb.String("Keith Gulgowski"),
+        Age: pb.String("Avon"),
+        Color: pb.String("turquoise"),
+        ID: pb.String("<ID>"),
+        Name: pb.String("plum"),
     })
     if err != nil {
         log.Fatal(err)
@@ -240,17 +256,22 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
+	pb "PB"
+	"PB/pkg/models/shared"
 	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
+            Key1: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
         Filter: []interface{}{
-            "ea",
+            "qua",
         },
     })
     if err != nil {
@@ -288,28 +309,29 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
-	"PB/pkg/models/operations"
+	pb "PB"
 	"PB/pkg/models/shared"
+	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
-    operationSecurity := operations.GetAnimalsByIDSecurity{
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
             Key1: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
         Animals: &shared.Animals{
-            Age: pb.Int64(396506),
-            Color: pb.String("laborum"),
-            ID: pb.String("e395efb9-ba88-4f3a-a699-7074ba4469b6"),
-            Name: pb.String("Brandon Brakus V"),
+            Age: pb.Int64(942154),
+            Color: pb.String("plum"),
+            ID: pb.String("<ID>"),
+            Name: pb.String("enhance product"),
         },
-        ID: "59890afa-563e-4251-afe4-c8b711e5b7fd",
-        PerPage: pb.Int64(149448),
-    }, operationSecurity)
+        ID: "<ID>",
+        PerPage: pb.Int64(208636),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -322,11 +344,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.GetAnimalsByIDRequest](../../models/operations/getanimalsbyidrequest.md)   | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `security`                                                                             | [operations.GetAnimalsByIDSecurity](../../models/operations/getanimalsbyidsecurity.md) | :heavy_check_mark:                                                                     | The security requirements to use for the request.                                      |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.GetAnimalsByIDRequest](../../models/operations/getanimalsbyidrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
@@ -346,27 +367,28 @@ package main
 import(
 	"context"
 	"log"
-	"PB"
-	"PB/pkg/models/operations"
+	pb "PB"
 	"PB/pkg/models/shared"
+	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New()
-    operationSecurity := operations.UpdateAnimalsByIDSecurity{
+    s := pb.New(
+        pb.WithSecurity(shared.Security{
             Key1: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{
         Animals: &shared.Animals{
-            Age: pb.Int64(904648),
-            Color: pb.String("pariatur"),
-            ID: pb.String("028921cd-dc69-4260-9fb5-76b0d5f0d30c"),
-            Name: pb.String("Mindy Renner"),
+            Age: pb.Int64(15412),
+            Color: pb.String("ivory"),
+            ID: pb.String("<ID>"),
+            Name: pb.String("index Elizabeth Fish"),
         },
-        ID: "58705320-2c73-4d5f-a9b9-0c28909b3fe4",
-    }, operationSecurity)
+        ID: "<ID>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -379,11 +401,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.UpdateAnimalsByIDRequest](../../models/operations/updateanimalsbyidrequest.md)   | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `security`                                                                                   | [operations.UpdateAnimalsByIDSecurity](../../models/operations/updateanimalsbyidsecurity.md) | :heavy_check_mark:                                                                           | The security requirements to use for the request.                                            |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
+| `request`                                                                                  | [operations.UpdateAnimalsByIDRequest](../../models/operations/updateanimalsbyidrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
