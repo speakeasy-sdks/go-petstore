@@ -4,8 +4,7 @@ package operations
 
 import (
 	"PB/pkg/models/shared"
-	"bytes"
-	"encoding/json"
+	"PB/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -88,21 +87,16 @@ func CreateGetAllLivingThings200ApplicationJSON2MetaGetAllLivingThings200Applica
 }
 
 func (u *GetAllLivingThings200ApplicationJSON2Meta) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	getAllLivingThings200ApplicationJSON2Meta1 := new(GetAllLivingThings200ApplicationJSON2Meta1)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&getAllLivingThings200ApplicationJSON2Meta1); err == nil {
+	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2Meta1, "", true, true); err == nil {
 		u.GetAllLivingThings200ApplicationJSON2Meta1 = getAllLivingThings200ApplicationJSON2Meta1
 		u.Type = GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta1
 		return nil
 	}
 
 	getAllLivingThings200ApplicationJSON2Meta2 := new(GetAllLivingThings200ApplicationJSON2Meta2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&getAllLivingThings200ApplicationJSON2Meta2); err == nil {
+	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2Meta2, "", true, true); err == nil {
 		u.GetAllLivingThings200ApplicationJSON2Meta2 = getAllLivingThings200ApplicationJSON2Meta2
 		u.Type = GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta2
 		return nil
@@ -113,14 +107,14 @@ func (u *GetAllLivingThings200ApplicationJSON2Meta) UnmarshalJSON(data []byte) e
 
 func (u GetAllLivingThings200ApplicationJSON2Meta) MarshalJSON() ([]byte, error) {
 	if u.GetAllLivingThings200ApplicationJSON2Meta1 != nil {
-		return json.Marshal(u.GetAllLivingThings200ApplicationJSON2Meta1)
+		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON2Meta1, "", true)
 	}
 
 	if u.GetAllLivingThings200ApplicationJSON2Meta2 != nil {
-		return json.Marshal(u.GetAllLivingThings200ApplicationJSON2Meta2)
+		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON2Meta2, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type GetAllLivingThings200ApplicationJSON2 struct {
@@ -216,21 +210,16 @@ func CreateGetAllLivingThings200ApplicationJSONGetAllLivingThings200ApplicationJ
 }
 
 func (u *GetAllLivingThings200ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	getAllLivingThings200ApplicationJSON1 := new(GetAllLivingThings200ApplicationJSON1)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&getAllLivingThings200ApplicationJSON1); err == nil {
+	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON1, "", true, true); err == nil {
 		u.GetAllLivingThings200ApplicationJSON1 = getAllLivingThings200ApplicationJSON1
 		u.Type = GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON1
 		return nil
 	}
 
 	getAllLivingThings200ApplicationJSON2 := new(GetAllLivingThings200ApplicationJSON2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&getAllLivingThings200ApplicationJSON2); err == nil {
+	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2, "", true, true); err == nil {
 		u.GetAllLivingThings200ApplicationJSON2 = getAllLivingThings200ApplicationJSON2
 		u.Type = GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON2
 		return nil
@@ -241,22 +230,25 @@ func (u *GetAllLivingThings200ApplicationJSON) UnmarshalJSON(data []byte) error 
 
 func (u GetAllLivingThings200ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.GetAllLivingThings200ApplicationJSON1 != nil {
-		return json.Marshal(u.GetAllLivingThings200ApplicationJSON1)
+		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON1, "", true)
 	}
 
 	if u.GetAllLivingThings200ApplicationJSON2 != nil {
-		return json.Marshal(u.GetAllLivingThings200ApplicationJSON2)
+		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON2, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type GetAllLivingThingsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	GetAllLivingThings200ApplicationJSONObject *GetAllLivingThings200ApplicationJSON
+	GetAllLivingThings200ApplicationJSONOneOf *GetAllLivingThings200ApplicationJSON
 }
 
 func (o *GetAllLivingThingsResponse) GetContentType() string {
@@ -280,9 +272,9 @@ func (o *GetAllLivingThingsResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *GetAllLivingThingsResponse) GetGetAllLivingThings200ApplicationJSONObject() *GetAllLivingThings200ApplicationJSON {
+func (o *GetAllLivingThingsResponse) GetGetAllLivingThings200ApplicationJSONOneOf() *GetAllLivingThings200ApplicationJSON {
 	if o == nil {
 		return nil
 	}
-	return o.GetAllLivingThings200ApplicationJSONObject
+	return o.GetAllLivingThings200ApplicationJSONOneOf
 }

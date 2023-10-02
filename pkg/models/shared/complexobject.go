@@ -3,36 +3,74 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
+	"PB/pkg/utils"
 	"errors"
 )
 
+type ComplexObjectDataBirds2 struct {
+}
+
+type ComplexObjectDataBirdsType string
+
+const (
+	ComplexObjectDataBirdsTypeArrayOfany              ComplexObjectDataBirdsType = "arrayOfany"
+	ComplexObjectDataBirdsTypeComplexObjectDataBirds2 ComplexObjectDataBirdsType = "ComplexObject_data_birds_2"
+)
+
 type ComplexObjectDataBirds struct {
-	Food []string `json:"food"`
-	ID   string   `json:"id"`
-	Name string   `json:"name"`
+	ArrayOfany              []interface{}
+	ComplexObjectDataBirds2 *ComplexObjectDataBirds2
+
+	Type ComplexObjectDataBirdsType
 }
 
-func (o *ComplexObjectDataBirds) GetFood() []string {
-	if o == nil {
-		return []string{}
+func CreateComplexObjectDataBirdsArrayOfany(arrayOfany []interface{}) ComplexObjectDataBirds {
+	typ := ComplexObjectDataBirdsTypeArrayOfany
+
+	return ComplexObjectDataBirds{
+		ArrayOfany: arrayOfany,
+		Type:       typ,
 	}
-	return o.Food
 }
 
-func (o *ComplexObjectDataBirds) GetID() string {
-	if o == nil {
-		return ""
+func CreateComplexObjectDataBirdsComplexObjectDataBirds2(complexObjectDataBirds2 ComplexObjectDataBirds2) ComplexObjectDataBirds {
+	typ := ComplexObjectDataBirdsTypeComplexObjectDataBirds2
+
+	return ComplexObjectDataBirds{
+		ComplexObjectDataBirds2: &complexObjectDataBirds2,
+		Type:                    typ,
 	}
-	return o.ID
 }
 
-func (o *ComplexObjectDataBirds) GetName() string {
-	if o == nil {
-		return ""
+func (u *ComplexObjectDataBirds) UnmarshalJSON(data []byte) error {
+
+	complexObjectDataBirds2 := new(ComplexObjectDataBirds2)
+	if err := utils.UnmarshalJSON(data, &complexObjectDataBirds2, "", true, true); err == nil {
+		u.ComplexObjectDataBirds2 = complexObjectDataBirds2
+		u.Type = ComplexObjectDataBirdsTypeComplexObjectDataBirds2
+		return nil
 	}
-	return o.Name
+
+	arrayOfany := []interface{}{}
+	if err := utils.UnmarshalJSON(data, &arrayOfany, "", true, true); err == nil {
+		u.ArrayOfany = arrayOfany
+		u.Type = ComplexObjectDataBirdsTypeArrayOfany
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u ComplexObjectDataBirds) MarshalJSON() ([]byte, error) {
+	if u.ArrayOfany != nil {
+		return utils.MarshalJSON(u.ArrayOfany, "", true)
+	}
+
+	if u.ComplexObjectDataBirds2 != nil {
+		return utils.MarshalJSON(u.ComplexObjectDataBirds2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ComplexObjectDataCreatedDateType string
@@ -68,21 +106,16 @@ func CreateComplexObjectDataCreatedDateStr(str string) ComplexObjectDataCreatedD
 }
 
 func (u *ComplexObjectDataCreatedDate) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	integer := new(int64)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&integer); err == nil {
+	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
 		u.Integer = integer
 		u.Type = ComplexObjectDataCreatedDateTypeInteger
 		return nil
 	}
 
 	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = str
 		u.Type = ComplexObjectDataCreatedDateTypeStr
 		return nil
@@ -93,21 +126,84 @@ func (u *ComplexObjectDataCreatedDate) UnmarshalJSON(data []byte) error {
 
 func (u ComplexObjectDataCreatedDate) MarshalJSON() ([]byte, error) {
 	if u.Integer != nil {
-		return json.Marshal(u.Integer)
+		return utils.MarshalJSON(u.Integer, "", true)
 	}
 
 	if u.Str != nil {
-		return json.Marshal(u.Str)
+		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+type ComplexObjectDataUpdatedDateType string
+
+const (
+	ComplexObjectDataUpdatedDateTypeInteger ComplexObjectDataUpdatedDateType = "integer"
+	ComplexObjectDataUpdatedDateTypeNumber  ComplexObjectDataUpdatedDateType = "number"
+)
+
+type ComplexObjectDataUpdatedDate struct {
+	Integer *int64
+	Number  *float64
+
+	Type ComplexObjectDataUpdatedDateType
+}
+
+func CreateComplexObjectDataUpdatedDateInteger(integer int64) ComplexObjectDataUpdatedDate {
+	typ := ComplexObjectDataUpdatedDateTypeInteger
+
+	return ComplexObjectDataUpdatedDate{
+		Integer: &integer,
+		Type:    typ,
+	}
+}
+
+func CreateComplexObjectDataUpdatedDateNumber(number float64) ComplexObjectDataUpdatedDate {
+	typ := ComplexObjectDataUpdatedDateTypeNumber
+
+	return ComplexObjectDataUpdatedDate{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func (u *ComplexObjectDataUpdatedDate) UnmarshalJSON(data []byte) error {
+
+	integer := new(int64)
+	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
+		u.Integer = integer
+		u.Type = ComplexObjectDataUpdatedDateTypeInteger
+		return nil
+	}
+
+	number := new(float64)
+	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+		u.Number = number
+		u.Type = ComplexObjectDataUpdatedDateTypeNumber
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u ComplexObjectDataUpdatedDate) MarshalJSON() ([]byte, error) {
+	if u.Integer != nil {
+		return utils.MarshalJSON(u.Integer, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ComplexObjectData struct {
 	Animal      []Animals                     `json:"animal,omitempty"`
 	Birds       *ComplexObjectDataBirds       `json:"birds,omitempty"`
 	CreatedDate *ComplexObjectDataCreatedDate `json:"createdDate,omitempty"`
-	UpdatedDate interface{}                   `json:"updatedDate,omitempty"`
+	UpdatedDate *ComplexObjectDataUpdatedDate `json:"updatedDate,omitempty"`
 }
 
 func (o *ComplexObjectData) GetAnimal() []Animals {
@@ -131,7 +227,7 @@ func (o *ComplexObjectData) GetCreatedDate() *ComplexObjectDataCreatedDate {
 	return o.CreatedDate
 }
 
-func (o *ComplexObjectData) GetUpdatedDate() interface{} {
+func (o *ComplexObjectData) GetUpdatedDate() *ComplexObjectDataUpdatedDate {
 	if o == nil {
 		return nil
 	}
@@ -182,21 +278,16 @@ func CreateComplexObjectMetaComplexObjectMeta2(complexObjectMeta2 ComplexObjectM
 }
 
 func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	complexObjectMeta2 := new(ComplexObjectMeta2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&complexObjectMeta2); err == nil {
+	if err := utils.UnmarshalJSON(data, &complexObjectMeta2, "", true, true); err == nil {
 		u.ComplexObjectMeta2 = complexObjectMeta2
 		u.Type = ComplexObjectMetaTypeComplexObjectMeta2
 		return nil
 	}
 
 	pagination := new(Pagination)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&pagination); err == nil {
+	if err := utils.UnmarshalJSON(data, &pagination, "", true, true); err == nil {
 		u.Pagination = pagination
 		u.Type = ComplexObjectMetaTypePagination
 		return nil
@@ -206,15 +297,15 @@ func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
 }
 
 func (u ComplexObjectMeta) MarshalJSON() ([]byte, error) {
-	if u.ComplexObjectMeta2 != nil {
-		return json.Marshal(u.ComplexObjectMeta2)
-	}
-
 	if u.Pagination != nil {
-		return json.Marshal(u.Pagination)
+		return utils.MarshalJSON(u.Pagination, "", true)
 	}
 
-	return nil, nil
+	if u.ComplexObjectMeta2 != nil {
+		return utils.MarshalJSON(u.ComplexObjectMeta2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ComplexObject struct {
