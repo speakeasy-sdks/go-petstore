@@ -40,11 +40,10 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
-        Age: pb.Int64(239780),
-        Color: "maroon",
+    res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
+        Color: "white",
         ID: "<ID>",
-        Name: "Buckinghamshire TLS",
+        Name: "illo Jeep",
     })
     if err != nil {
         log.Fatal(err)
@@ -93,22 +92,26 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Animals.CreateLivingThings(ctx, shared.ComplexObject{
+    res, err := s.Animals.CreateLivingThings(ctx, &shared.ComplexObject{
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
-                shared.Animals{
-                    Age: pb.Int64(24488),
-                    Color: pb.String("sky blue"),
-                    ID: pb.String("<ID>"),
-                    Name: pb.String("loyalty Officer withdrawal"),
-                },
+                shared.Animals{},
             },
-            Birds: &shared.ComplexObjectDataBirds{},
-            CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: &shared.ComplexObjectDataUpdatedDate{},
+            Birds: shared.CreateComplexObjectDataBirdsArrayOfany(
+                    []interface{}{
+                        "input",
+                    },
+            ),
+            CreatedDate: shared.CreateComplexObjectDataCreatedDateInteger(
+            248447,
+            ),
+            UpdatedDate: shared.CreateComplexObjectDataUpdatedDateNumber(
+            6866.6,
+            ),
         },
-        Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("female Fantastic B2B"),
+        Meta: shared.CreateComplexObjectMetaPagination(
+                shared.Pagination{},
+        ),
     })
     if err != nil {
         log.Fatal(err)
@@ -209,12 +212,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Animals.GetAllAnimals(ctx, operations.GetAllAnimalsRequest{
-        Age: pb.String("Avon"),
-        Color: pb.String("turquoise"),
-        ID: pb.String("<ID>"),
-        Name: pb.String("plum"),
-    })
+    res, err := s.Animals.GetAllAnimals(ctx, operations.GetAllAnimalsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -317,14 +315,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
-        Animals: &shared.Animals{
-            Age: pb.Int64(942154),
-            Color: pb.String("plum"),
-            ID: pb.String("<ID>"),
-            Name: pb.String("enhance product"),
-        },
+        Animals: &shared.Animals{},
         ID: "<ID>",
-        PerPage: pb.Int64(208636),
     })
     if err != nil {
         log.Fatal(err)
@@ -375,12 +367,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{
-        Animals: &shared.Animals{
-            Age: pb.Int64(15412),
-            Color: pb.String("ivory"),
-            ID: pb.String("<ID>"),
-            Name: pb.String("index Elizabeth Fish"),
-        },
+        Animals: &shared.Animals{},
         ID: "<ID>",
     })
     if err != nil {

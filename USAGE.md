@@ -20,11 +20,10 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Animals.CreateAnimal(ctx, operations.CreateAnimalRequestBody{
-        Age: pb.Int64(239780),
-        Color: "maroon",
+    res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
+        Color: "white",
         ID: "<ID>",
-        Name: "Buckinghamshire TLS",
+        Name: "illo Jeep",
     })
     if err != nil {
         log.Fatal(err)

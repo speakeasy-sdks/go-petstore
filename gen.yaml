@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 2554149823bfd7b4f9664a81d29a1aea
   docVersion: "1.0"
-  speakeasyVersion: 1.92.3
-  generationVersion: 2.143.2
+  speakeasyVersion: 1.96.1
+  generationVersion: 2.150.0
 generation:
   comments:
     disableComments: false
@@ -14,12 +14,13 @@ generation:
   tagNamespacingDisabled: false
 features:
   go:
-    core: 2.91.1
+    core: 2.91.4
     getRequestBodies: 2.81.1
-    globalSecurity: 2.82.0
+    globalSecurity: 2.82.2
     globalServerURLs: 2.82.0
     unions: 2.83.1
 go:
-  version: 1.6.0
+  version: 1.6.1
+  flattenGlobalSecurity: true
   maxMethodParams: 0
   packageName: PB

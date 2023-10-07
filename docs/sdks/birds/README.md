@@ -36,22 +36,26 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.CreateLivingThings(ctx, shared.ComplexObject{
+    res, err := s.Birds.CreateLivingThings(ctx, &shared.ComplexObject{
         Data: &shared.ComplexObjectData{
             Animal: []shared.Animals{
-                shared.Animals{
-                    Age: pb.Int64(24488),
-                    Color: pb.String("sky blue"),
-                    ID: pb.String("<ID>"),
-                    Name: pb.String("loyalty Officer withdrawal"),
-                },
+                shared.Animals{},
             },
-            Birds: &shared.ComplexObjectDataBirds{},
-            CreatedDate: &shared.ComplexObjectDataCreatedDate{},
-            UpdatedDate: &shared.ComplexObjectDataUpdatedDate{},
+            Birds: shared.CreateComplexObjectDataBirdsArrayOfany(
+                    []interface{}{
+                        "input",
+                    },
+            ),
+            CreatedDate: shared.CreateComplexObjectDataCreatedDateInteger(
+            248447,
+            ),
+            UpdatedDate: shared.CreateComplexObjectDataUpdatedDateNumber(
+            6866.6,
+            ),
         },
-        Meta: &shared.ComplexObjectMeta{},
-        Name: pb.String("female Fantastic B2B"),
+        Meta: shared.CreateComplexObjectMetaPagination(
+                shared.Pagination{},
+        ),
     })
     if err != nil {
         log.Fatal(err)
@@ -100,34 +104,23 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.CreateNewBird(ctx, shared.NestedBird{
+    res, err := s.Birds.CreateNewBird(ctx, &shared.NestedBird{
         Age: &shared.NestedBirdAge{
-            Amount: pb.Float64(5601.46),
             Unit: shared.NestedBirdAgeUnitYears,
         },
         Flight: &shared.NestedBirdFlight{
-            CanFly: pb.Bool(false),
             Wings: &shared.NestedBirdFlightWings{
-                Count: pb.Int64(959530),
-                Span: &shared.NestedBirdFlightWingsSpan{
-                    Amount: pb.Float64(7898.44),
-                    Unit: pb.String("katal"),
-                },
+                Span: &shared.NestedBirdFlightWingsSpan{},
             },
         },
         Food: []string{
-            "digital",
+            "silver",
         },
-        ID: pb.String("<ID>"),
         Location: []shared.NestedBirdLocation{
             shared.NestedBirdLocation{
-                Geography: &shared.NestedBirdLocationGeography{
-                    Latitude: pb.String("-69.7312"),
-                    Longitutde: pb.String("Response"),
-                },
+                Geography: &shared.NestedBirdLocationGeography{},
             },
         },
-        Name: pb.String("wipe Southwest"),
     })
     if err != nil {
         log.Fatal(err)
@@ -176,13 +169,8 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.GetAllBirds(ctx, []shared.Birds{
-        shared.Birds{
-            CanFly: pb.Bool(false),
-            ID: pb.String("<ID>"),
-            Name: pb.String("Creative"),
-            WingSpan: pb.Int64(956031),
-        },
+    res, err := s.Birds.GetAllBirds(ctx, &[]shared.Birds{
+        shared.Birds{},
     })
     if err != nil {
         log.Fatal(err)
