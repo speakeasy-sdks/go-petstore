@@ -13,35 +13,34 @@ go get github.com/speakeasy-sdks/go-petstore
 ```go
 package main
 
-import(
+import (
+	pb "PB"
+	"PB/pkg/models/operations"
+	"PB/pkg/models/shared"
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
 )
 
 func main() {
-    s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
-    )
+	s := pb.New(
+		pb.WithSecurity(""),
+	)
 
-    ctx := context.Background()
-    res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
-        Color: "white",
-        ID: "<ID>",
-        Name: "illo Jeep",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
+	ctx := context.Background()
+	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
+		Color: "white",
+		ID:    "<ID>",
+		Name:  "illo Jeep",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    if res.Animals != nil {
-        // handle response
-    }
+	if res.Animals != nil {
+		// handle response
+	}
 }
+
 ```
 <!-- End SDK Example Usage -->
 

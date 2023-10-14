@@ -34,9 +34,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -86,9 +84,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -155,9 +151,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -206,9 +200,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -255,9 +247,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -308,9 +298,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -360,9 +348,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(shared.Security{
-            Key1: "",
-        }),
+        pb.WithSecurity(""),
     )
 
     ctx := context.Background()
