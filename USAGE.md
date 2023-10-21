@@ -21,7 +21,7 @@ func main() {
 	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
 		Color: "white",
 		ID:    "<ID>",
-		Name:  "illo Jeep",
+		Name:  "string",
 	})
 	if err != nil {
 		log.Fatal(err)

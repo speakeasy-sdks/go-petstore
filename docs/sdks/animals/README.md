@@ -41,7 +41,7 @@ func main() {
     res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
         Color: "white",
         ID: "<ID>",
-        Name: "illo Jeep",
+        Name: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -95,14 +95,14 @@ func main() {
             },
             Birds: shared.CreateComplexObjectDataBirdsArrayOfany(
                     []interface{}{
-                        "input",
+                        "string",
                     },
             ),
-            CreatedDate: shared.CreateComplexObjectDataCreatedDateInteger(
-            248447,
+            CreatedDate: shared.CreateComplexObjectDataCreatedDateStr(
+            "string",
             ),
             UpdatedDate: shared.CreateComplexObjectDataUpdatedDateNumber(
-            6866.6,
+            3824.71,
             ),
         },
         Meta: shared.CreateComplexObjectMetaPagination(
@@ -253,7 +253,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
         Filter: []interface{}{
-            "qua",
+            "string",
         },
     })
     if err != nil {
