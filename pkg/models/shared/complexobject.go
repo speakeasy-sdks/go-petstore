@@ -44,9 +44,9 @@ func CreateComplexObjectDataBirdsComplexObjectDataBirds2(complexObjectDataBirds2
 
 func (u *ComplexObjectDataBirds) UnmarshalJSON(data []byte) error {
 
-	complexObjectDataBirds2 := new(ComplexObjectDataBirds2)
+	complexObjectDataBirds2 := ComplexObjectDataBirds2{}
 	if err := utils.UnmarshalJSON(data, &complexObjectDataBirds2, "", true, true); err == nil {
-		u.ComplexObjectDataBirds2 = complexObjectDataBirds2
+		u.ComplexObjectDataBirds2 = &complexObjectDataBirds2
 		u.Type = ComplexObjectDataBirdsTypeComplexObjectDataBirds2
 		return nil
 	}
@@ -107,16 +107,16 @@ func CreateComplexObjectDataCreatedDateStr(str string) ComplexObjectDataCreatedD
 
 func (u *ComplexObjectDataCreatedDate) UnmarshalJSON(data []byte) error {
 
-	integer := new(int64)
+	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
-		u.Integer = integer
+		u.Integer = &integer
 		u.Type = ComplexObjectDataCreatedDateTypeInteger
 		return nil
 	}
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
+		u.Str = &str
 		u.Type = ComplexObjectDataCreatedDateTypeStr
 		return nil
 	}
@@ -170,16 +170,16 @@ func CreateComplexObjectDataUpdatedDateNumber(number float64) ComplexObjectDataU
 
 func (u *ComplexObjectDataUpdatedDate) UnmarshalJSON(data []byte) error {
 
-	integer := new(int64)
+	integer := int64(0)
 	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
-		u.Integer = integer
+		u.Integer = &integer
 		u.Type = ComplexObjectDataUpdatedDateTypeInteger
 		return nil
 	}
 
-	number := new(float64)
+	number := float64(0)
 	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
-		u.Number = number
+		u.Number = &number
 		u.Type = ComplexObjectDataUpdatedDateTypeNumber
 		return nil
 	}
@@ -279,16 +279,16 @@ func CreateComplexObjectMetaComplexObjectMeta2(complexObjectMeta2 ComplexObjectM
 
 func (u *ComplexObjectMeta) UnmarshalJSON(data []byte) error {
 
-	complexObjectMeta2 := new(ComplexObjectMeta2)
+	complexObjectMeta2 := ComplexObjectMeta2{}
 	if err := utils.UnmarshalJSON(data, &complexObjectMeta2, "", true, true); err == nil {
-		u.ComplexObjectMeta2 = complexObjectMeta2
+		u.ComplexObjectMeta2 = &complexObjectMeta2
 		u.Type = ComplexObjectMetaTypeComplexObjectMeta2
 		return nil
 	}
 
-	pagination := new(Pagination)
+	pagination := Pagination{}
 	if err := utils.UnmarshalJSON(data, &pagination, "", true, true); err == nil {
-		u.Pagination = pagination
+		u.Pagination = &pagination
 		u.Type = ComplexObjectMetaTypePagination
 		return nil
 	}

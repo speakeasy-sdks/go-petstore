@@ -88,16 +88,16 @@ func CreateGetAllLivingThings200ApplicationJSON2MetaGetAllLivingThings200Applica
 
 func (u *GetAllLivingThings200ApplicationJSON2Meta) UnmarshalJSON(data []byte) error {
 
-	getAllLivingThings200ApplicationJSON2Meta1 := new(GetAllLivingThings200ApplicationJSON2Meta1)
+	getAllLivingThings200ApplicationJSON2Meta1 := GetAllLivingThings200ApplicationJSON2Meta1{}
 	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2Meta1, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON2Meta1 = getAllLivingThings200ApplicationJSON2Meta1
+		u.GetAllLivingThings200ApplicationJSON2Meta1 = &getAllLivingThings200ApplicationJSON2Meta1
 		u.Type = GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta1
 		return nil
 	}
 
-	getAllLivingThings200ApplicationJSON2Meta2 := new(GetAllLivingThings200ApplicationJSON2Meta2)
+	getAllLivingThings200ApplicationJSON2Meta2 := GetAllLivingThings200ApplicationJSON2Meta2{}
 	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2Meta2, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON2Meta2 = getAllLivingThings200ApplicationJSON2Meta2
+		u.GetAllLivingThings200ApplicationJSON2Meta2 = &getAllLivingThings200ApplicationJSON2Meta2
 		u.Type = GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta2
 		return nil
 	}
@@ -211,16 +211,16 @@ func CreateGetAllLivingThings200ApplicationJSONGetAllLivingThings200ApplicationJ
 
 func (u *GetAllLivingThings200ApplicationJSON) UnmarshalJSON(data []byte) error {
 
-	getAllLivingThings200ApplicationJSON1 := new(GetAllLivingThings200ApplicationJSON1)
+	getAllLivingThings200ApplicationJSON1 := GetAllLivingThings200ApplicationJSON1{}
 	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON1, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON1 = getAllLivingThings200ApplicationJSON1
+		u.GetAllLivingThings200ApplicationJSON1 = &getAllLivingThings200ApplicationJSON1
 		u.Type = GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON1
 		return nil
 	}
 
-	getAllLivingThings200ApplicationJSON2 := new(GetAllLivingThings200ApplicationJSON2)
+	getAllLivingThings200ApplicationJSON2 := GetAllLivingThings200ApplicationJSON2{}
 	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON2 = getAllLivingThings200ApplicationJSON2
+		u.GetAllLivingThings200ApplicationJSON2 = &getAllLivingThings200ApplicationJSON2
 		u.Type = GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON2
 		return nil
 	}
