@@ -5,9 +5,9 @@
 package main
 
 import (
-	pb "PB"
-	"PB/pkg/models/operations"
-	"PB/pkg/models/shared"
+	pb "PB/v2"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/shared"
 	"context"
 	"log"
 )

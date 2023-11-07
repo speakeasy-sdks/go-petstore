@@ -14,9 +14,9 @@ go get github.com/speakeasy-sdks/go-petstore
 package main
 
 import (
-	pb "PB"
-	"PB/pkg/models/operations"
-	"PB/pkg/models/shared"
+	pb "PB/v2"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/shared"
 	"context"
 	"log"
 )
@@ -48,7 +48,7 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Animals](docs/sdks/animals/README.md)
+### [.Animals](docs/sdks/animals/README.md)
 
 * [CreateAnimal](docs/sdks/animals/README.md#createanimal) - create an animal
 * [CreateLivingThings](docs/sdks/animals/README.md#createlivingthings) - create a living thing
@@ -58,7 +58,7 @@ func main() {
 * [GetAnimalsByID](docs/sdks/animals/README.md#getanimalsbyid) - Get Animal
 * [UpdateAnimalsByID](docs/sdks/animals/README.md#updateanimalsbyid) - Update Animal
 
-### [Birds](docs/sdks/birds/README.md)
+### [.Birds](docs/sdks/birds/README.md)
 
 * [CreateLivingThings](docs/sdks/birds/README.md#createlivingthings) - create a living thing
 * [CreateNewBird](docs/sdks/birds/README.md#createnewbird) - Create new Bird
@@ -98,6 +98,42 @@ Here's an example of one such pagination call:
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
 
 
+## Example
+
+```go
+package main
+
+import (
+	pb "PB/v2"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/shared"
+	"context"
+	"log"
+)
+
+func main() {
+	s := pb.New(
+		pb.WithSecurity(""),
+	)
+
+	ctx := context.Background()
+	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
+		Color: "white",
+		ID:    "<ID>",
+		Name:  "string",
+	})
+	if err != nil {
+
+		var e *sdkerrors.Error
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+	}
+}
+
+```
 <!-- End Error Handling -->
 
 
@@ -116,22 +152,21 @@ You can override the default server globally using the `WithServerIndex` option 
 
 For example:
 
-
 ```go
 package main
 
 import (
-	pb "PB"
-	"PB/pkg/models/operations"
-	"PB/pkg/models/shared"
+	pb "PB/v2"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/shared"
 	"context"
 	"log"
 )
 
 func main() {
 	s := pb.New(
-		pb.WithSecurity(""),
 		pb.WithServerIndex(1),
+		pb.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -156,22 +191,21 @@ func main() {
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
 
-
 ```go
 package main
 
 import (
-	pb "PB"
-	"PB/pkg/models/operations"
-	"PB/pkg/models/shared"
+	pb "PB/v2"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/shared"
 	"context"
 	"log"
 )
 
 func main() {
 	s := pb.New(
-		pb.WithSecurity(""),
 		pb.WithServerURL("https://api.petstore.com"),
+		pb.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -222,6 +256,56 @@ var (
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
 <!-- End Custom HTTP Client -->
+
+
+
+<!-- Start Authentication -->
+
+# Authentication
+
+## Per-Client Security Schemes
+
+Your SDK supports the following security scheme globally:
+
+| Name         | Type         | Scheme       |
+| ------------ | ------------ | ------------ |
+| `Key1`       | oauth2       | OAuth2 token |
+
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+
+```go
+package main
+
+import (
+	pb "PB/v2"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/shared"
+	"context"
+	"log"
+)
+
+func main() {
+	s := pb.New(
+		pb.WithSecurity(""),
+	)
+
+	ctx := context.Background()
+	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
+		Color: "white",
+		ID:    "<ID>",
+		Name:  "string",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.Animals != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

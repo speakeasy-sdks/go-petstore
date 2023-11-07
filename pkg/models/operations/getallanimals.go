@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"PB/pkg/models/shared"
+	"PB/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -43,23 +43,14 @@ func (o *GetAllAnimalsRequest) GetName() *string {
 }
 
 type GetAllAnimalsResponse struct {
-	// OK
-	Animals []shared.Animals
 	// HTTP response content type for this operation
 	ContentType string
-	// Internal Server Error
-	Error *shared.Error
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *GetAllAnimalsResponse) GetAnimals() []shared.Animals {
-	if o == nil {
-		return nil
-	}
-	return o.Animals
+	// OK
+	Classes []shared.Animals
 }
 
 func (o *GetAllAnimalsResponse) GetContentType() string {
@@ -67,13 +58,6 @@ func (o *GetAllAnimalsResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetAllAnimalsResponse) GetError() *shared.Error {
-	if o == nil {
-		return nil
-	}
-	return o.Error
 }
 
 func (o *GetAllAnimalsResponse) GetStatusCode() int {
@@ -88,4 +72,11 @@ func (o *GetAllAnimalsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetAllAnimalsResponse) GetClasses() []shared.Animals {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

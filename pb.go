@@ -3,8 +3,8 @@
 package pb
 
 import (
-	"PB/pkg/models/shared"
-	"PB/pkg/utils"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/utils"
 	"context"
 	"fmt"
 	"net/http"
@@ -68,9 +68,9 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // An Example Petstore API
 type Pb struct {
 	// Work with Animals.
-	Animals *animals
+	Animals *Animals
 	// Birds information.
-	Birds *birds
+	Birds *Birds
 
 	sdkConfiguration sdkConfiguration
 }
@@ -140,9 +140,9 @@ func New(opts ...SDKOption) *Pb {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "1.7.1",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 1.7.1 2.173.0 1.0 PB",
+			SDKVersion:        "2.0.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 2.0.0 2.181.1 1.0 PB",
 		},
 	}
 	for _, opt := range opts {

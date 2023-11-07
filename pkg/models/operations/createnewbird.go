@@ -3,43 +3,43 @@
 package operations
 
 import (
-	"PB/pkg/models/shared"
+	"PB/v2/pkg/models/shared"
 	"net/http"
 )
 
-type CreateNewBird200ApplicationJSONMeta struct {
+type Meta struct {
 	Pagination *shared.Pagination `json:"pagination,omitempty"`
 	TraceID    *string            `json:"traceId,omitempty"`
 }
 
-func (o *CreateNewBird200ApplicationJSONMeta) GetPagination() *shared.Pagination {
+func (o *Meta) GetPagination() *shared.Pagination {
 	if o == nil {
 		return nil
 	}
 	return o.Pagination
 }
 
-func (o *CreateNewBird200ApplicationJSONMeta) GetTraceID() *string {
+func (o *Meta) GetTraceID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.TraceID
 }
 
-// CreateNewBird200ApplicationJSON - OK
-type CreateNewBird200ApplicationJSON struct {
-	Data *shared.NestedBird                   `json:"data,omitempty"`
-	Meta *CreateNewBird200ApplicationJSONMeta `json:"meta,omitempty"`
+// CreateNewBirdResponseBody - OK
+type CreateNewBirdResponseBody struct {
+	Data *shared.NestedBird `json:"data,omitempty"`
+	Meta *Meta              `json:"meta,omitempty"`
 }
 
-func (o *CreateNewBird200ApplicationJSON) GetData() *shared.NestedBird {
+func (o *CreateNewBirdResponseBody) GetData() *shared.NestedBird {
 	if o == nil {
 		return nil
 	}
 	return o.Data
 }
 
-func (o *CreateNewBird200ApplicationJSON) GetMeta() *CreateNewBird200ApplicationJSONMeta {
+func (o *CreateNewBirdResponseBody) GetMeta() *Meta {
 	if o == nil {
 		return nil
 	}
@@ -54,7 +54,7 @@ type CreateNewBirdResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	CreateNewBird200ApplicationJSONObject *CreateNewBird200ApplicationJSON
+	Object *CreateNewBirdResponseBody
 }
 
 func (o *CreateNewBirdResponse) GetContentType() string {
@@ -78,9 +78,9 @@ func (o *CreateNewBirdResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *CreateNewBirdResponse) GetCreateNewBird200ApplicationJSONObject() *CreateNewBird200ApplicationJSON {
+func (o *CreateNewBirdResponse) GetObject() *CreateNewBirdResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.CreateNewBird200ApplicationJSONObject
+	return o.Object
 }

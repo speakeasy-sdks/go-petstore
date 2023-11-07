@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"PB/pkg/models/shared"
+	"PB/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -31,8 +31,6 @@ type UpdateAnimalsByIDResponse struct {
 	Animals *shared.Animals
 	// HTTP response content type for this operation
 	ContentType string
-	// Internal Server Error
-	Error *shared.Error
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -51,13 +49,6 @@ func (o *UpdateAnimalsByIDResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *UpdateAnimalsByIDResponse) GetError() *shared.Error {
-	if o == nil {
-		return nil
-	}
-	return o.Error
 }
 
 func (o *UpdateAnimalsByIDResponse) GetStatusCode() int {

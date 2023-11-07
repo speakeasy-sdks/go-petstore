@@ -3,10 +3,10 @@
 package pb
 
 import (
-	"PB/pkg/models/operations"
-	"PB/pkg/models/sdkerrors"
-	"PB/pkg/models/shared"
-	"PB/pkg/utils"
+	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/sdkerrors"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/utils"
 	"bytes"
 	"context"
 	"fmt"
@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// animals - Work with Animals.
-type animals struct {
+// Animals - Work with Animals.
+type Animals struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAnimals(sdkConfig sdkConfiguration) *animals {
-	return &animals{
+func newAnimals(sdkConfig sdkConfiguration) *Animals {
+	return &Animals{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateAnimal - create an animal
 // Post animals description
-func (s *animals) CreateAnimal(ctx context.Context, request *operations.CreateAnimalRequestBody) (*operations.CreateAnimalResponse, error) {
+func (s *Animals) CreateAnimal(ctx context.Context, request *operations.CreateAnimalRequestBody) (*operations.CreateAnimalResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/animals"
 
@@ -83,15 +83,18 @@ func (s *animals) CreateAnimal(ctx context.Context, request *operations.CreateAn
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -102,7 +105,7 @@ func (s *animals) CreateAnimal(ctx context.Context, request *operations.CreateAn
 
 // CreateLivingThings - create a living thing
 // Create a living thing
-func (s *animals) CreateLivingThings(ctx context.Context, request *shared.ComplexObject) (*operations.CreateLivingThingsResponse, error) {
+func (s *Animals) CreateLivingThings(ctx context.Context, request *shared.ComplexObject) (*operations.CreateLivingThingsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/living-things"
 
@@ -157,15 +160,18 @@ func (s *animals) CreateLivingThings(ctx context.Context, request *shared.Comple
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -176,7 +182,7 @@ func (s *animals) CreateLivingThings(ctx context.Context, request *shared.Comple
 
 // DeleteAnimalsByID - Delete Animal Object
 // Delete the animal
-func (s *animals) DeleteAnimalsByID(ctx context.Context, request operations.DeleteAnimalsByIDRequest) (*operations.DeleteAnimalsByIDResponse, error) {
+func (s *Animals) DeleteAnimalsByID(ctx context.Context, request operations.DeleteAnimalsByIDRequest) (*operations.DeleteAnimalsByIDResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
 	if err != nil {
@@ -216,15 +222,18 @@ func (s *animals) DeleteAnimalsByID(ctx context.Context, request operations.Dele
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -235,7 +244,7 @@ func (s *animals) DeleteAnimalsByID(ctx context.Context, request operations.Dele
 
 // GetAllAnimals - Your GET endpoint
 // Get Animals Description
-func (s *animals) GetAllAnimals(ctx context.Context, request operations.GetAllAnimalsRequest) (*operations.GetAllAnimalsResponse, error) {
+func (s *Animals) GetAllAnimals(ctx context.Context, request operations.GetAllAnimalsRequest) (*operations.GetAllAnimalsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/animals"
 
@@ -283,19 +292,22 @@ func (s *animals) GetAllAnimals(ctx context.Context, request operations.GetAllAn
 				return nil, err
 			}
 
-			res.Animals = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -306,7 +318,7 @@ func (s *animals) GetAllAnimals(ctx context.Context, request operations.GetAllAn
 
 // GetAllLivingThings - Get All living things
 // get All living things data
-func (s *animals) GetAllLivingThings(ctx context.Context, request operations.GetAllLivingThingsRequest) (*operations.GetAllLivingThingsResponse, error) {
+func (s *Animals) GetAllLivingThings(ctx context.Context, request operations.GetAllLivingThingsRequest) (*operations.GetAllLivingThingsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/living-things"
 
@@ -349,15 +361,19 @@ func (s *animals) GetAllLivingThings(ctx context.Context, request operations.Get
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.GetAllLivingThings200ApplicationJSON
+			var out operations.GetAllLivingThingsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.GetAllLivingThings200ApplicationJSONOneOf = &out
+			res.OneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -365,7 +381,7 @@ func (s *animals) GetAllLivingThings(ctx context.Context, request operations.Get
 
 // GetAnimalsByID - Get Animal
 // Get an animal
-func (s *animals) GetAnimalsByID(ctx context.Context, request operations.GetAnimalsByIDRequest) (*operations.GetAnimalsByIDResponse, error) {
+func (s *Animals) GetAnimalsByID(ctx context.Context, request operations.GetAnimalsByIDRequest) (*operations.GetAnimalsByIDResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
 	if err != nil {
@@ -427,15 +443,18 @@ func (s *animals) GetAnimalsByID(ctx context.Context, request operations.GetAnim
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -446,7 +465,7 @@ func (s *animals) GetAnimalsByID(ctx context.Context, request operations.GetAnim
 
 // UpdateAnimalsByID - Update Animal
 // Update the animal object
-func (s *animals) UpdateAnimalsByID(ctx context.Context, request operations.UpdateAnimalsByIDRequest) (*operations.UpdateAnimalsByIDResponse, error) {
+func (s *Animals) UpdateAnimalsByID(ctx context.Context, request operations.UpdateAnimalsByIDRequest) (*operations.UpdateAnimalsByIDResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
 	if err != nil {
@@ -504,15 +523,18 @@ func (s *animals) UpdateAnimalsByID(ctx context.Context, request operations.Upda
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

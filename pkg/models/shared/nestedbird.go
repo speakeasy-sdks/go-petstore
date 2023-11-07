@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-type NestedBirdAgeUnit string
+type Unit string
 
 const (
-	NestedBirdAgeUnitMonths NestedBirdAgeUnit = "months"
-	NestedBirdAgeUnitYears  NestedBirdAgeUnit = "years"
-	NestedBirdAgeUnitDays   NestedBirdAgeUnit = "days"
+	UnitMonths Unit = "months"
+	UnitYears  Unit = "years"
+	UnitDays   Unit = "days"
 )
 
-func (e NestedBirdAgeUnit) ToPointer() *NestedBirdAgeUnit {
+func (e Unit) ToPointer() *Unit {
 	return &e
 }
 
-func (e *NestedBirdAgeUnit) UnmarshalJSON(data []byte) error {
+func (e *Unit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,113 +30,113 @@ func (e *NestedBirdAgeUnit) UnmarshalJSON(data []byte) error {
 	case "years":
 		fallthrough
 	case "days":
-		*e = NestedBirdAgeUnit(v)
+		*e = Unit(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for NestedBirdAgeUnit: %v", v)
+		return fmt.Errorf("invalid value for Unit: %v", v)
 	}
 }
 
-type NestedBirdAge struct {
-	Amount *float64          `json:"amount,omitempty"`
-	Unit   NestedBirdAgeUnit `json:"unit"`
+type Age struct {
+	Amount *float64 `json:"amount,omitempty"`
+	Unit   Unit     `json:"unit"`
 }
 
-func (o *NestedBirdAge) GetAmount() *float64 {
+func (o *Age) GetAmount() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.Amount
 }
 
-func (o *NestedBirdAge) GetUnit() NestedBirdAgeUnit {
+func (o *Age) GetUnit() Unit {
 	if o == nil {
-		return NestedBirdAgeUnit("")
+		return Unit("")
 	}
 	return o.Unit
 }
 
-type NestedBirdFlightWingsSpan struct {
+type Span struct {
 	Amount *float64 `json:"amount,omitempty"`
 	Unit   *string  `json:"unit,omitempty"`
 }
 
-func (o *NestedBirdFlightWingsSpan) GetAmount() *float64 {
+func (o *Span) GetAmount() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.Amount
 }
 
-func (o *NestedBirdFlightWingsSpan) GetUnit() *string {
+func (o *Span) GetUnit() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Unit
 }
 
-type NestedBirdFlightWings struct {
-	Count *int64                     `json:"count,omitempty"`
-	Span  *NestedBirdFlightWingsSpan `json:"span,omitempty"`
+type Wings struct {
+	Count *int64 `json:"count,omitempty"`
+	Span  *Span  `json:"span,omitempty"`
 }
 
-func (o *NestedBirdFlightWings) GetCount() *int64 {
+func (o *Wings) GetCount() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Count
 }
 
-func (o *NestedBirdFlightWings) GetSpan() *NestedBirdFlightWingsSpan {
+func (o *Wings) GetSpan() *Span {
 	if o == nil {
 		return nil
 	}
 	return o.Span
 }
 
-type NestedBirdFlight struct {
-	CanFly *bool                  `json:"canFly,omitempty"`
-	Wings  *NestedBirdFlightWings `json:"wings,omitempty"`
+type Flight struct {
+	CanFly *bool  `json:"canFly,omitempty"`
+	Wings  *Wings `json:"wings,omitempty"`
 }
 
-func (o *NestedBirdFlight) GetCanFly() *bool {
+func (o *Flight) GetCanFly() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.CanFly
 }
 
-func (o *NestedBirdFlight) GetWings() *NestedBirdFlightWings {
+func (o *Flight) GetWings() *Wings {
 	if o == nil {
 		return nil
 	}
 	return o.Wings
 }
 
-type NestedBirdLocationGeography struct {
+type Geography struct {
 	Latitude   *string `json:"latitude,omitempty"`
 	Longitutde *string `json:"longitutde,omitempty"`
 }
 
-func (o *NestedBirdLocationGeography) GetLatitude() *string {
+func (o *Geography) GetLatitude() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Latitude
 }
 
-func (o *NestedBirdLocationGeography) GetLongitutde() *string {
+func (o *Geography) GetLongitutde() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Longitutde
 }
 
-type NestedBirdLocation struct {
-	Geography *NestedBirdLocationGeography `json:"geography,omitempty"`
+type Location struct {
+	Geography *Geography `json:"geography,omitempty"`
 }
 
-func (o *NestedBirdLocation) GetGeography() *NestedBirdLocationGeography {
+func (o *Location) GetGeography() *Geography {
 	if o == nil {
 		return nil
 	}
@@ -144,22 +144,22 @@ func (o *NestedBirdLocation) GetGeography() *NestedBirdLocationGeography {
 }
 
 type NestedBird struct {
-	Age      *NestedBirdAge       `json:"age,omitempty"`
-	Flight   *NestedBirdFlight    `json:"flight,omitempty"`
-	Food     []string             `json:"food,omitempty"`
-	ID       *string              `json:"id,omitempty"`
-	Location []NestedBirdLocation `json:"location,omitempty"`
-	Name     *string              `json:"name,omitempty"`
+	Age      *Age       `json:"age,omitempty"`
+	Flight   *Flight    `json:"flight,omitempty"`
+	Food     []string   `json:"food,omitempty"`
+	ID       *string    `json:"id,omitempty"`
+	Location []Location `json:"location,omitempty"`
+	Name     *string    `json:"name,omitempty"`
 }
 
-func (o *NestedBird) GetAge() *NestedBirdAge {
+func (o *NestedBird) GetAge() *Age {
 	if o == nil {
 		return nil
 	}
 	return o.Age
 }
 
-func (o *NestedBird) GetFlight() *NestedBirdFlight {
+func (o *NestedBird) GetFlight() *Flight {
 	if o == nil {
 		return nil
 	}
@@ -180,7 +180,7 @@ func (o *NestedBird) GetID() *string {
 	return o.ID
 }
 
-func (o *NestedBird) GetLocation() []NestedBirdLocation {
+func (o *NestedBird) GetLocation() []Location {
 	if o == nil {
 		return nil
 	}

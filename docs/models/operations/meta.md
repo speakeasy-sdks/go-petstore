@@ -1,4 +1,4 @@
-# CreateNewBird200ApplicationJSONMeta
+# Meta
 
 
 ## Fields

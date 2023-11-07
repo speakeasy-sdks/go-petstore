@@ -1,8 +1,9 @@
-# GetAllLivingThings200ApplicationJSON1MetaPagination
+# Span
 
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `PageNumber`       | **int64*           | :heavy_minus_sign: | N/A                |
+| `Amount`           | **float64*         | :heavy_minus_sign: | N/A                |
+| `Unit`             | **string*          | :heavy_minus_sign: | N/A                |

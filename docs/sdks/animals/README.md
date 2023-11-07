@@ -1,5 +1,5 @@
 # Animals
-(*Animals*)
+(*.Animals*)
 
 ## Overview
 
@@ -27,9 +27,9 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/models/operations"
 )
 
 func main() {
@@ -78,8 +78,8 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
 )
 
 func main() {
@@ -89,23 +89,23 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.CreateLivingThings(ctx, &shared.ComplexObject{
-        Data: &shared.ComplexObjectData{
+        Data: &shared.Data{
             Animal: []shared.Animals{
                 shared.Animals{},
             },
-            Birds: shared.CreateComplexObjectDataBirdsArrayOfany(
+            Birds: shared.CreateComplexObjectBirdsArrayOfany(
                     []interface{}{
                         "string",
                     },
             ),
-            CreatedDate: shared.CreateComplexObjectDataCreatedDateStr(
+            CreatedDate: shared.CreateCreatedDateStr(
             "string",
             ),
-            UpdatedDate: shared.CreateComplexObjectDataUpdatedDateNumber(
+            UpdatedDate: shared.CreateUpdatedDateNumber(
             3824.71,
             ),
         },
-        Meta: shared.CreateComplexObjectMetaPagination(
+        Meta: shared.CreateMetaPagination(
                 shared.Pagination{},
         ),
     })
@@ -144,9 +144,9 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/models/operations"
 )
 
 func main() {
@@ -193,9 +193,9 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/models/operations"
 )
 
 func main() {
@@ -209,7 +209,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Animals != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -240,9 +240,9 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/models/operations"
 )
 
 func main() {
@@ -260,7 +260,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.GetAllLivingThings200ApplicationJSONOneOf != nil {
+    if res.OneOf != nil {
         // handle response
     }
 }
@@ -291,9 +291,9 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/models/operations"
 )
 
 func main() {
@@ -341,9 +341,9 @@ package main
 import(
 	"context"
 	"log"
-	pb "PB"
-	"PB/pkg/models/shared"
-	"PB/pkg/models/operations"
+	pb "PB/v2"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/models/operations"
 )
 
 func main() {

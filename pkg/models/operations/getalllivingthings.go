@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"PB/pkg/models/shared"
-	"PB/pkg/utils"
+	"PB/v2/pkg/models/shared"
+	"PB/v2/pkg/utils"
 	"errors"
 	"net/http"
 )
@@ -21,220 +21,220 @@ func (o *GetAllLivingThingsRequest) GetFilter() []interface{} {
 	return o.Filter
 }
 
-type GetAllLivingThings200ApplicationJSON2Meta2Pagination struct {
+type GetAllLivingThingsPagination struct {
 	PageNumber *int64 `json:"pageNumber,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON2Meta2Pagination) GetPageNumber() *int64 {
+func (o *GetAllLivingThingsPagination) GetPageNumber() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.PageNumber
 }
 
-type GetAllLivingThings200ApplicationJSON2Meta2 struct {
-	Pagination *GetAllLivingThings200ApplicationJSON2Meta2Pagination `json:"pagination,omitempty"`
+type GetAllLivingThings2 struct {
+	Pagination *GetAllLivingThingsPagination `json:"pagination,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON2Meta2) GetPagination() *GetAllLivingThings200ApplicationJSON2Meta2Pagination {
+func (o *GetAllLivingThings2) GetPagination() *GetAllLivingThingsPagination {
 	if o == nil {
 		return nil
 	}
 	return o.Pagination
 }
 
-type GetAllLivingThings200ApplicationJSON2Meta1 struct {
+type GetAllLivingThings1 struct {
 	Pagination *shared.Pagination `json:"pagination,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON2Meta1) GetPagination() *shared.Pagination {
+func (o *GetAllLivingThings1) GetPagination() *shared.Pagination {
 	if o == nil {
 		return nil
 	}
 	return o.Pagination
 }
 
-type GetAllLivingThings200ApplicationJSON2MetaType string
+type GetAllLivingThingsMetaType string
 
 const (
-	GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta1 GetAllLivingThings200ApplicationJSON2MetaType = "get-all-living-things_200ApplicationJSON_2_meta_1"
-	GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta2 GetAllLivingThings200ApplicationJSON2MetaType = "get-all-living-things_200ApplicationJSON_2_meta_2"
+	GetAllLivingThingsMetaTypeGetAllLivingThings1 GetAllLivingThingsMetaType = "get-all-living-things_1"
+	GetAllLivingThingsMetaTypeGetAllLivingThings2 GetAllLivingThingsMetaType = "get-all-living-things_2"
 )
 
-type GetAllLivingThings200ApplicationJSON2Meta struct {
-	GetAllLivingThings200ApplicationJSON2Meta1 *GetAllLivingThings200ApplicationJSON2Meta1
-	GetAllLivingThings200ApplicationJSON2Meta2 *GetAllLivingThings200ApplicationJSON2Meta2
+type GetAllLivingThingsMeta struct {
+	GetAllLivingThings1 *GetAllLivingThings1
+	GetAllLivingThings2 *GetAllLivingThings2
 
-	Type GetAllLivingThings200ApplicationJSON2MetaType
+	Type GetAllLivingThingsMetaType
 }
 
-func CreateGetAllLivingThings200ApplicationJSON2MetaGetAllLivingThings200ApplicationJSON2Meta1(getAllLivingThings200ApplicationJSON2Meta1 GetAllLivingThings200ApplicationJSON2Meta1) GetAllLivingThings200ApplicationJSON2Meta {
-	typ := GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta1
+func CreateGetAllLivingThingsMetaGetAllLivingThings1(getAllLivingThings1 GetAllLivingThings1) GetAllLivingThingsMeta {
+	typ := GetAllLivingThingsMetaTypeGetAllLivingThings1
 
-	return GetAllLivingThings200ApplicationJSON2Meta{
-		GetAllLivingThings200ApplicationJSON2Meta1: &getAllLivingThings200ApplicationJSON2Meta1,
-		Type: typ,
+	return GetAllLivingThingsMeta{
+		GetAllLivingThings1: &getAllLivingThings1,
+		Type:                typ,
 	}
 }
 
-func CreateGetAllLivingThings200ApplicationJSON2MetaGetAllLivingThings200ApplicationJSON2Meta2(getAllLivingThings200ApplicationJSON2Meta2 GetAllLivingThings200ApplicationJSON2Meta2) GetAllLivingThings200ApplicationJSON2Meta {
-	typ := GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta2
+func CreateGetAllLivingThingsMetaGetAllLivingThings2(getAllLivingThings2 GetAllLivingThings2) GetAllLivingThingsMeta {
+	typ := GetAllLivingThingsMetaTypeGetAllLivingThings2
 
-	return GetAllLivingThings200ApplicationJSON2Meta{
-		GetAllLivingThings200ApplicationJSON2Meta2: &getAllLivingThings200ApplicationJSON2Meta2,
-		Type: typ,
+	return GetAllLivingThingsMeta{
+		GetAllLivingThings2: &getAllLivingThings2,
+		Type:                typ,
 	}
 }
 
-func (u *GetAllLivingThings200ApplicationJSON2Meta) UnmarshalJSON(data []byte) error {
+func (u *GetAllLivingThingsMeta) UnmarshalJSON(data []byte) error {
 
-	getAllLivingThings200ApplicationJSON2Meta1 := GetAllLivingThings200ApplicationJSON2Meta1{}
-	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2Meta1, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON2Meta1 = &getAllLivingThings200ApplicationJSON2Meta1
-		u.Type = GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta1
+	getAllLivingThings1 := GetAllLivingThings1{}
+	if err := utils.UnmarshalJSON(data, &getAllLivingThings1, "", true, true); err == nil {
+		u.GetAllLivingThings1 = &getAllLivingThings1
+		u.Type = GetAllLivingThingsMetaTypeGetAllLivingThings1
 		return nil
 	}
 
-	getAllLivingThings200ApplicationJSON2Meta2 := GetAllLivingThings200ApplicationJSON2Meta2{}
-	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2Meta2, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON2Meta2 = &getAllLivingThings200ApplicationJSON2Meta2
-		u.Type = GetAllLivingThings200ApplicationJSON2MetaTypeGetAllLivingThings200ApplicationJSON2Meta2
+	getAllLivingThings2 := GetAllLivingThings2{}
+	if err := utils.UnmarshalJSON(data, &getAllLivingThings2, "", true, true); err == nil {
+		u.GetAllLivingThings2 = &getAllLivingThings2
+		u.Type = GetAllLivingThingsMetaTypeGetAllLivingThings2
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u GetAllLivingThings200ApplicationJSON2Meta) MarshalJSON() ([]byte, error) {
-	if u.GetAllLivingThings200ApplicationJSON2Meta1 != nil {
-		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON2Meta1, "", true)
+func (u GetAllLivingThingsMeta) MarshalJSON() ([]byte, error) {
+	if u.GetAllLivingThings1 != nil {
+		return utils.MarshalJSON(u.GetAllLivingThings1, "", true)
 	}
 
-	if u.GetAllLivingThings200ApplicationJSON2Meta2 != nil {
-		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON2Meta2, "", true)
+	if u.GetAllLivingThings2 != nil {
+		return utils.MarshalJSON(u.GetAllLivingThings2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-type GetAllLivingThings200ApplicationJSON2 struct {
-	Animals []shared.Animals                           `json:"animals,omitempty"`
-	Meta    *GetAllLivingThings200ApplicationJSON2Meta `json:"meta,omitempty"`
+type Two struct {
+	Animals []shared.Animals        `json:"animals,omitempty"`
+	Meta    *GetAllLivingThingsMeta `json:"meta,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON2) GetAnimals() []shared.Animals {
+func (o *Two) GetAnimals() []shared.Animals {
 	if o == nil {
 		return nil
 	}
 	return o.Animals
 }
 
-func (o *GetAllLivingThings200ApplicationJSON2) GetMeta() *GetAllLivingThings200ApplicationJSON2Meta {
+func (o *Two) GetMeta() *GetAllLivingThingsMeta {
 	if o == nil {
 		return nil
 	}
 	return o.Meta
 }
 
-type GetAllLivingThings200ApplicationJSON1MetaPagination struct {
+type Pagination struct {
 	PageNumber *int64 `json:"pageNumber,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON1MetaPagination) GetPageNumber() *int64 {
+func (o *Pagination) GetPageNumber() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.PageNumber
 }
 
-type GetAllLivingThings200ApplicationJSON1Meta struct {
-	Pagination *GetAllLivingThings200ApplicationJSON1MetaPagination `json:"pagination,omitempty"`
+type GetAllLivingThingsAnimalsMeta struct {
+	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON1Meta) GetPagination() *GetAllLivingThings200ApplicationJSON1MetaPagination {
+func (o *GetAllLivingThingsAnimalsMeta) GetPagination() *Pagination {
 	if o == nil {
 		return nil
 	}
 	return o.Pagination
 }
 
-type GetAllLivingThings200ApplicationJSON1 struct {
-	Birds []shared.Birds                             `json:"birds,omitempty"`
-	Meta  *GetAllLivingThings200ApplicationJSON1Meta `json:"meta,omitempty"`
+type One struct {
+	Birds []shared.Birds                 `json:"birds,omitempty"`
+	Meta  *GetAllLivingThingsAnimalsMeta `json:"meta,omitempty"`
 }
 
-func (o *GetAllLivingThings200ApplicationJSON1) GetBirds() []shared.Birds {
+func (o *One) GetBirds() []shared.Birds {
 	if o == nil {
 		return nil
 	}
 	return o.Birds
 }
 
-func (o *GetAllLivingThings200ApplicationJSON1) GetMeta() *GetAllLivingThings200ApplicationJSON1Meta {
+func (o *One) GetMeta() *GetAllLivingThingsAnimalsMeta {
 	if o == nil {
 		return nil
 	}
 	return o.Meta
 }
 
-type GetAllLivingThings200ApplicationJSONType string
+type GetAllLivingThingsResponseBodyType string
 
 const (
-	GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON1 GetAllLivingThings200ApplicationJSONType = "get-all-living-things_200ApplicationJSON_1"
-	GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON2 GetAllLivingThings200ApplicationJSONType = "get-all-living-things_200ApplicationJSON_2"
+	GetAllLivingThingsResponseBodyTypeOne GetAllLivingThingsResponseBodyType = "1"
+	GetAllLivingThingsResponseBodyTypeTwo GetAllLivingThingsResponseBodyType = "2"
 )
 
-type GetAllLivingThings200ApplicationJSON struct {
-	GetAllLivingThings200ApplicationJSON1 *GetAllLivingThings200ApplicationJSON1
-	GetAllLivingThings200ApplicationJSON2 *GetAllLivingThings200ApplicationJSON2
+type GetAllLivingThingsResponseBody struct {
+	One *One
+	Two *Two
 
-	Type GetAllLivingThings200ApplicationJSONType
+	Type GetAllLivingThingsResponseBodyType
 }
 
-func CreateGetAllLivingThings200ApplicationJSONGetAllLivingThings200ApplicationJSON1(getAllLivingThings200ApplicationJSON1 GetAllLivingThings200ApplicationJSON1) GetAllLivingThings200ApplicationJSON {
-	typ := GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON1
+func CreateGetAllLivingThingsResponseBodyOne(one One) GetAllLivingThingsResponseBody {
+	typ := GetAllLivingThingsResponseBodyTypeOne
 
-	return GetAllLivingThings200ApplicationJSON{
-		GetAllLivingThings200ApplicationJSON1: &getAllLivingThings200ApplicationJSON1,
-		Type:                                  typ,
+	return GetAllLivingThingsResponseBody{
+		One:  &one,
+		Type: typ,
 	}
 }
 
-func CreateGetAllLivingThings200ApplicationJSONGetAllLivingThings200ApplicationJSON2(getAllLivingThings200ApplicationJSON2 GetAllLivingThings200ApplicationJSON2) GetAllLivingThings200ApplicationJSON {
-	typ := GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON2
+func CreateGetAllLivingThingsResponseBodyTwo(two Two) GetAllLivingThingsResponseBody {
+	typ := GetAllLivingThingsResponseBodyTypeTwo
 
-	return GetAllLivingThings200ApplicationJSON{
-		GetAllLivingThings200ApplicationJSON2: &getAllLivingThings200ApplicationJSON2,
-		Type:                                  typ,
+	return GetAllLivingThingsResponseBody{
+		Two:  &two,
+		Type: typ,
 	}
 }
 
-func (u *GetAllLivingThings200ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *GetAllLivingThingsResponseBody) UnmarshalJSON(data []byte) error {
 
-	getAllLivingThings200ApplicationJSON1 := GetAllLivingThings200ApplicationJSON1{}
-	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON1, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON1 = &getAllLivingThings200ApplicationJSON1
-		u.Type = GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON1
+	one := One{}
+	if err := utils.UnmarshalJSON(data, &one, "", true, true); err == nil {
+		u.One = &one
+		u.Type = GetAllLivingThingsResponseBodyTypeOne
 		return nil
 	}
 
-	getAllLivingThings200ApplicationJSON2 := GetAllLivingThings200ApplicationJSON2{}
-	if err := utils.UnmarshalJSON(data, &getAllLivingThings200ApplicationJSON2, "", true, true); err == nil {
-		u.GetAllLivingThings200ApplicationJSON2 = &getAllLivingThings200ApplicationJSON2
-		u.Type = GetAllLivingThings200ApplicationJSONTypeGetAllLivingThings200ApplicationJSON2
+	two := Two{}
+	if err := utils.UnmarshalJSON(data, &two, "", true, true); err == nil {
+		u.Two = &two
+		u.Type = GetAllLivingThingsResponseBodyTypeTwo
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u GetAllLivingThings200ApplicationJSON) MarshalJSON() ([]byte, error) {
-	if u.GetAllLivingThings200ApplicationJSON1 != nil {
-		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON1, "", true)
+func (u GetAllLivingThingsResponseBody) MarshalJSON() ([]byte, error) {
+	if u.One != nil {
+		return utils.MarshalJSON(u.One, "", true)
 	}
 
-	if u.GetAllLivingThings200ApplicationJSON2 != nil {
-		return utils.MarshalJSON(u.GetAllLivingThings200ApplicationJSON2, "", true)
+	if u.Two != nil {
+		return utils.MarshalJSON(u.Two, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -248,7 +248,7 @@ type GetAllLivingThingsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	GetAllLivingThings200ApplicationJSONOneOf *GetAllLivingThings200ApplicationJSON
+	OneOf *GetAllLivingThingsResponseBody
 }
 
 func (o *GetAllLivingThingsResponse) GetContentType() string {
@@ -272,9 +272,9 @@ func (o *GetAllLivingThingsResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *GetAllLivingThingsResponse) GetGetAllLivingThings200ApplicationJSONOneOf() *GetAllLivingThings200ApplicationJSON {
+func (o *GetAllLivingThingsResponse) GetOneOf() *GetAllLivingThingsResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.GetAllLivingThings200ApplicationJSONOneOf
+	return o.OneOf
 }
