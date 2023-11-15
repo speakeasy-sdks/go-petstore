@@ -46,7 +46,7 @@ func (s *Animals) CreateAnimal(ctx context.Context, request *operations.CreateAn
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -406,7 +406,7 @@ func (s *Animals) GetAnimalsByID(ctx context.Context, request operations.GetAnim
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -486,7 +486,7 @@ func (s *Animals) UpdateAnimalsByID(ctx context.Context, request operations.Upda
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

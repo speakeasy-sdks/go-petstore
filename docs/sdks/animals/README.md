@@ -33,9 +33,7 @@ import(
 )
 
 func main() {
-    s := pb.New(
-        pb.WithSecurity(""),
-    )
+    s := pb.New()
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
@@ -311,9 +309,7 @@ import(
 )
 
 func main() {
-    s := pb.New(
-        pb.WithSecurity(""),
-    )
+    s := pb.New()
 
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
@@ -364,9 +360,7 @@ import(
 )
 
 func main() {
-    s := pb.New(
-        pb.WithSecurity(""),
-    )
+    s := pb.New()
 
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{

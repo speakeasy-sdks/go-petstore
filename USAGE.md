@@ -1,6 +1,4 @@
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
@@ -13,9 +11,7 @@ import (
 )
 
 func main() {
-	s := pb.New(
-		pb.WithSecurity(""),
-	)
+	s := pb.New()
 
 	ctx := context.Background()
 	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
