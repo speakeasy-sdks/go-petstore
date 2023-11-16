@@ -11,7 +11,9 @@ import (
 )
 
 func main() {
-	s := pb.New()
+	s := pb.New(
+		pb.WithSecurity(""),
+	)
 
 	ctx := context.Background()
 	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{

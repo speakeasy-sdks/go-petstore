@@ -25,15 +25,17 @@ Post animals description
 package main
 
 import(
-	"context"
-	"log"
-	pb "PB/v2"
 	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
+	"context"
 	"PB/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(""),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
@@ -77,10 +79,10 @@ Create a living thing
 package main
 
 import(
+	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
 	"context"
 	"log"
-	pb "PB/v2"
-	"PB/v2/pkg/models/shared"
 )
 
 func main() {
@@ -146,11 +148,12 @@ Delete the animal
 package main
 
 import(
-	"context"
-	"log"
-	pb "PB/v2"
 	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
+	"context"
 	"PB/v2/pkg/models/operations"
+	"log"
+	"net/http"
 )
 
 func main() {
@@ -198,11 +201,11 @@ Get Animals Description
 package main
 
 import(
-	"context"
-	"log"
-	pb "PB/v2"
 	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
+	"context"
 	"PB/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -248,11 +251,11 @@ get All living things data
 package main
 
 import(
-	"context"
-	"log"
-	pb "PB/v2"
 	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
+	"context"
 	"PB/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -301,15 +304,17 @@ Get an animal
 package main
 
 import(
-	"context"
-	"log"
-	pb "PB/v2"
 	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
+	"context"
 	"PB/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(""),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
@@ -352,15 +357,17 @@ Update the animal object
 package main
 
 import(
-	"context"
-	"log"
-	pb "PB/v2"
 	"PB/v2/pkg/models/shared"
+	pb "PB/v2"
+	"context"
 	"PB/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
-    s := pb.New()
+    s := pb.New(
+        pb.WithSecurity(""),
+    )
 
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{

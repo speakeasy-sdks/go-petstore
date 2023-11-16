@@ -24,7 +24,9 @@ import (
 )
 
 func main() {
-	s := pb.New()
+	s := pb.New(
+		pb.WithSecurity(""),
+	)
 
 	ctx := context.Background()
 	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
@@ -110,13 +112,17 @@ package main
 import (
 	pb "PB/v2"
 	"PB/v2/pkg/models/operations"
+	"PB/v2/pkg/models/sdkerrors"
 	"PB/v2/pkg/models/shared"
 	"context"
+	"errors"
 	"log"
 )
 
 func main() {
-	s := pb.New()
+	s := pb.New(
+		pb.WithSecurity(""),
+	)
 
 	ctx := context.Background()
 	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
@@ -173,6 +179,7 @@ import (
 func main() {
 	s := pb.New(
 		pb.WithServerIndex(1),
+		pb.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -210,6 +217,7 @@ import (
 func main() {
 	s := pb.New(
 		pb.WithServerURL("https://api.petstore.com"),
+		pb.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -281,7 +289,6 @@ package main
 import (
 	pb "PB/v2"
 	"PB/v2/pkg/models/operations"
-	"PB/v2/pkg/models/shared"
 	"context"
 	"log"
 )
