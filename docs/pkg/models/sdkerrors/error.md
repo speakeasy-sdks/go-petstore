@@ -1,5 +1,7 @@
 # Error
 
+Internal Server Error
+
 
 ## Fields
 
