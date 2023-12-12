@@ -34,7 +34,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -87,7 +87,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -158,7 +158,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -210,7 +210,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -260,7 +260,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -313,7 +313,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -366,7 +366,7 @@ import(
 
 func main() {
     s := pb.New(
-        pb.WithSecurity(""),
+        pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
     )
 
     ctx := context.Background()

@@ -3,12 +3,12 @@
 package shared
 
 type Security struct {
-	Key1 string `security:"scheme,type=oauth2,name=Authorization"`
+	Key1 *string `security:"scheme,type=oauth2,name=Authorization"`
 }
 
-func (o *Security) GetKey1() string {
+func (o *Security) GetKey1() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Key1
 }

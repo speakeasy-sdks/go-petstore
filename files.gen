@@ -36,7 +36,6 @@ pkg/utils/utils.go
 /pkg/models/shared/nestedbird.go
 /pkg/models/shared/security.go
 /pkg/models/sdkerrors/error.go
-USAGE.md
 docs/pkg/models/operations/createanimalrequestbody.md
 docs/pkg/models/operations/createanimalresponse.md
 docs/pkg/models/operations/createlivingthingsresponse.md
@@ -87,4 +86,5 @@ docs/pkg/models/sdkerrors/error.md
 docs/sdks/pb/README.md
 docs/sdks/animals/README.md
 docs/sdks/birds/README.md
+USAGE.md
 .gitattributes

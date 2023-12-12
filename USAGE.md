@@ -1,4 +1,4 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ```go
 package main
 
@@ -12,7 +12,7 @@ import (
 
 func main() {
 	s := pb.New(
-		pb.WithSecurity(""),
+		pb.WithSecurity("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -31,4 +31,4 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
