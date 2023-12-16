@@ -184,6 +184,7 @@ const (
 	GetAllLivingThingsResponseBodyTypeTwo GetAllLivingThingsResponseBodyType = "2"
 )
 
+// GetAllLivingThingsResponseBody - OK
 type GetAllLivingThingsResponseBody struct {
 	One *One
 	Two *Two
