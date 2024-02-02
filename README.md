@@ -17,9 +17,9 @@ go get github.com/speakeasy-sdks/go-petstore
 package main
 
 import (
-	pb "PB/v2"
-	"PB/v2/pkg/models/operations"
-	"PB/v2/pkg/models/shared"
+	pb "PB/v3"
+	"PB/v3/pkg/models/operations"
+	"PB/v3/pkg/models/shared"
 	"context"
 	"log"
 )
@@ -98,10 +98,10 @@ Handling errors in this SDK should largely match your expectations.  All operati
 package main
 
 import (
-	pb "PB/v2"
-	"PB/v2/pkg/models/operations"
-	"PB/v2/pkg/models/sdkerrors"
-	"PB/v2/pkg/models/shared"
+	pb "PB/v3"
+	"PB/v3/pkg/models/operations"
+	"PB/v3/pkg/models/sdkerrors"
+	"PB/v3/pkg/models/shared"
 	"context"
 	"errors"
 	"log"
@@ -157,9 +157,9 @@ You can override the default server globally using the `WithServerIndex` option 
 package main
 
 import (
-	pb "PB/v2"
-	"PB/v2/pkg/models/operations"
-	"PB/v2/pkg/models/shared"
+	pb "PB/v3"
+	"PB/v3/pkg/models/operations"
+	"PB/v3/pkg/models/shared"
 	"context"
 	"log"
 )
@@ -195,9 +195,9 @@ The default server can also be overridden globally using the `WithServerURL` opt
 package main
 
 import (
-	pb "PB/v2"
-	"PB/v2/pkg/models/operations"
-	"PB/v2/pkg/models/shared"
+	pb "PB/v3"
+	"PB/v3/pkg/models/operations"
+	"PB/v3/pkg/models/shared"
 	"context"
 	"log"
 )
@@ -275,8 +275,8 @@ You can configure it using the `WithSecurity` option when initializing the SDK c
 package main
 
 import (
-	pb "PB/v2"
-	"PB/v2/pkg/models/operations"
+	pb "PB/v3"
+	"PB/v3/pkg/models/operations"
 	"context"
 	"log"
 )

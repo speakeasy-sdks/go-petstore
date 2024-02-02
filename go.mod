@@ -1,4 +1,4 @@
-module PB/v2
+module PB/v3
 
 go 1.20
 

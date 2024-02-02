@@ -22,8 +22,8 @@ Create a living thing
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
 	"log"
 )
@@ -91,8 +91,8 @@ Create a new Bird
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
 	"log"
 )
@@ -156,8 +156,8 @@ Get All birds
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
 	"log"
 )
@@ -207,10 +207,10 @@ get All living things data
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 )
 

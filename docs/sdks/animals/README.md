@@ -25,10 +25,10 @@ Post animals description
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 )
 
@@ -79,8 +79,8 @@ Create a living thing
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
 	"log"
 )
@@ -148,10 +148,10 @@ Delete the animal
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 	"net/http"
 )
@@ -201,10 +201,10 @@ Get Animals Description
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 )
 
@@ -251,10 +251,10 @@ get All living things data
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 )
 
@@ -304,10 +304,10 @@ Get an animal
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 )
 
@@ -357,10 +357,10 @@ Update the animal object
 package main
 
 import(
-	"PB/v2/pkg/models/shared"
-	pb "PB/v2"
+	"PB/v3/pkg/models/shared"
+	pb "PB/v3"
 	"context"
-	"PB/v2/pkg/models/operations"
+	"PB/v3/pkg/models/operations"
 	"log"
 )
 

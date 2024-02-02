@@ -3,10 +3,10 @@
 package pb
 
 import (
-	"PB/v2/pkg/models/operations"
-	"PB/v2/pkg/models/sdkerrors"
-	"PB/v2/pkg/models/shared"
-	"PB/v2/pkg/utils"
+	"PB/v3/pkg/models/operations"
+	"PB/v3/pkg/models/sdkerrors"
+	"PB/v3/pkg/models/shared"
+	"PB/v3/pkg/utils"
 	"bytes"
 	"context"
 	"fmt"
