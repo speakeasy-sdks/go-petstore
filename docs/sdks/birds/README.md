@@ -34,27 +34,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.CreateLivingThings(ctx, &shared.ComplexObject{
-        Data: &shared.Data{
-            Animal: []shared.Animals{
-                shared.Animals{},
-            },
-            Birds: shared.CreateComplexObjectBirdsArrayOfany(
-                    []interface{}{
-                        "string",
-                    },
-            ),
-            CreatedDate: shared.CreateCreatedDateStr(
-            "string",
-            ),
-            UpdatedDate: shared.CreateUpdatedDateNumber(
-            3824.71,
-            ),
-        },
-        Meta: shared.CreateMetaPagination(
-                shared.Pagination{},
-        ),
-    })
+    res, err := s.Birds.CreateLivingThings(ctx, &shared.ComplexObject{})
     if err != nil {
         log.Fatal(err)
     }
@@ -103,24 +83,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.CreateNewBird(ctx, &shared.NestedBird{
-        Age: &shared.Age{
-            Unit: shared.UnitYears,
-        },
-        Flight: &shared.Flight{
-            Wings: &shared.Wings{
-                Span: &shared.Span{},
-            },
-        },
-        Food: []string{
-            "string",
-        },
-        Location: []shared.Location{
-            shared.Location{
-                Geography: &shared.Geography{},
-            },
-        },
-    })
+    res, err := s.Birds.CreateNewBird(ctx, &shared.NestedBird{})
     if err != nil {
         log.Fatal(err)
     }
@@ -168,7 +131,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.GetAllBirds(ctx, &[]shared.Birds{
+    res, err := s.Birds.GetAllBirds(ctx, []shared.Birds{
         shared.Birds{},
     })
     if err != nil {
@@ -220,11 +183,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Birds.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{
-        Filter: []interface{}{
-            "string",
-        },
-    })
+    res, err := s.Birds.GetAllLivingThings(ctx, operations.GetAllLivingThingsRequest{})
     if err != nil {
         log.Fatal(err)
     }
