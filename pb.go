@@ -3,6 +3,7 @@
 package pb
 
 import (
+	"PB/v3/internal/hooks"
 	"PB/v3/pkg/models/shared"
 	"PB/v3/pkg/utils"
 	"context"
@@ -54,6 +55,7 @@ type sdkConfiguration struct {
 	GenVersion        string
 	UserAgent         string
 	RetryConfig       *utils.RetryConfig
+	Hooks             *hooks.Hooks
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -148,14 +150,17 @@ func New(opts ...SDKOption) *Pb {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "3.0.2",
-			GenVersion:        "2.253.0",
-			UserAgent:         "speakeasy-sdk/go 3.0.2 2.253.0 1.0 PB",
+			SDKVersion:        "3.1.0",
+			GenVersion:        "2.258.2",
+			UserAgent:         "speakeasy-sdk/go 3.1.0 2.258.2 1.0 PB",
+			Hooks:             hooks.New(),
 		},
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
+
+	sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.ClientInit(sdk.sdkConfiguration.DefaultClient)
 
 	// Use WithClient to override the default client if you would like to customize the timeout
 	if sdk.sdkConfiguration.DefaultClient == nil {

@@ -40,8 +40,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
         Color: "white",
-        ID: "<ID>",
-        Name: "string",
+        ID: "<id>",
+        Name: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -143,7 +143,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.DeleteAnimalsByID(ctx, operations.DeleteAnimalsByIDRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -294,7 +294,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.GetAnimalsByID(ctx, operations.GetAnimalsByIDRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -346,7 +346,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Animals.UpdateAnimalsByID(ctx, operations.UpdateAnimalsByIDRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

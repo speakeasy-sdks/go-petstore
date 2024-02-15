@@ -3,6 +3,7 @@
 package pb
 
 import (
+	"PB/v3/internal/hooks"
 	"PB/v3/pkg/models/operations"
 	"PB/v3/pkg/models/sdkerrors"
 	"PB/v3/pkg/models/shared"
@@ -12,7 +13,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strings"
+	"net/url"
 )
 
 // Animals - Work with Animals.
@@ -29,31 +30,54 @@ func newAnimals(sdkConfig sdkConfiguration) *Animals {
 // CreateAnimal - create an animal
 // Post animals description
 func (s *Animals) CreateAnimal(ctx context.Context, request *operations.CreateAnimalRequestBody) (*operations.CreateAnimalResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "create-animal"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/animals"
+	opURL, err := url.JoinPath(baseURL, "/animals")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -70,6 +94,7 @@ func (s *Animals) CreateAnimal(ctx context.Context, request *operations.CreateAn
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -106,31 +131,54 @@ func (s *Animals) CreateAnimal(ctx context.Context, request *operations.CreateAn
 // CreateLivingThings - create a living thing
 // Create a living thing
 func (s *Animals) CreateLivingThings(ctx context.Context, request *shared.ComplexObject) (*operations.CreateLivingThingsResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "create-living-things"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/living-things"
+	opURL, err := url.JoinPath(baseURL, "/living-things")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -147,6 +195,7 @@ func (s *Animals) CreateLivingThings(ctx context.Context, request *shared.Comple
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -183,27 +232,48 @@ func (s *Animals) CreateLivingThings(ctx context.Context, request *shared.Comple
 // DeleteAnimalsByID - Delete Animal Object
 // Delete the animal
 func (s *Animals) DeleteAnimalsByID(ctx context.Context, request operations.DeleteAnimalsByIDRequest) (*operations.DeleteAnimalsByIDResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "delete-animals-by-id"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "DELETE", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -220,6 +290,7 @@ func (s *Animals) DeleteAnimalsByID(ctx context.Context, request operations.Dele
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
@@ -245,15 +316,20 @@ func (s *Animals) DeleteAnimalsByID(ctx context.Context, request operations.Dele
 // GetAllAnimals - Your GET endpoint
 // Get Animals Description
 func (s *Animals) GetAllAnimals(ctx context.Context, request operations.GetAllAnimalsRequest) (*operations.GetAllAnimalsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/animals"
+	hookCtx := hooks.HookContext{OperationID: "get-all-animals"}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	opURL, err := url.JoinPath(baseURL, "/animals")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -261,12 +337,31 @@ func (s *Animals) GetAllAnimals(ctx context.Context, request operations.GetAllAn
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -283,6 +378,7 @@ func (s *Animals) GetAllAnimals(ctx context.Context, request operations.GetAllAn
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -319,15 +415,20 @@ func (s *Animals) GetAllAnimals(ctx context.Context, request operations.GetAllAn
 // GetAllLivingThings - Get All living things
 // get All living things data
 func (s *Animals) GetAllLivingThings(ctx context.Context, request operations.GetAllLivingThingsRequest) (*operations.GetAllLivingThingsResponse, error) {
-	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/living-things"
+	hookCtx := hooks.HookContext{OperationID: "get-all-living-things"}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	opURL, err := url.JoinPath(baseURL, "/living-things")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -335,12 +436,31 @@ func (s *Animals) GetAllLivingThings(ctx context.Context, request operations.Get
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -357,6 +477,7 @@ func (s *Animals) GetAllLivingThings(ctx context.Context, request operations.Get
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -382,24 +503,25 @@ func (s *Animals) GetAllLivingThings(ctx context.Context, request operations.Get
 // GetAnimalsByID - Get Animal
 // Get an animal
 func (s *Animals) GetAnimalsByID(ctx context.Context, request operations.GetAnimalsByIDRequest) (*operations.GetAnimalsByIDResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "get-animals-by-id"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Animals", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
@@ -408,12 +530,31 @@ func (s *Animals) GetAnimalsByID(ctx context.Context, request operations.GetAnim
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -430,6 +571,7 @@ func (s *Animals) GetAnimalsByID(ctx context.Context, request operations.GetAnim
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -466,34 +608,54 @@ func (s *Animals) GetAnimalsByID(ctx context.Context, request operations.GetAnim
 // UpdateAnimalsByID - Update Animal
 // Update the animal object
 func (s *Animals) UpdateAnimalsByID(ctx context.Context, request operations.UpdateAnimalsByIDRequest) (*operations.UpdateAnimalsByIDResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "update-animals-by-id"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/animals/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Animals", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "PATCH", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "PATCH", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -510,6 +672,7 @@ func (s *Animals) UpdateAnimalsByID(ctx context.Context, request operations.Upda
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {

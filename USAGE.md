@@ -18,8 +18,8 @@ func main() {
 	ctx := context.Background()
 	res, err := s.Animals.CreateAnimal(ctx, &operations.CreateAnimalRequestBody{
 		Color: "white",
-		ID:    "<ID>",
-		Name:  "string",
+		ID:    "<id>",
+		Name:  "<value>",
 	})
 	if err != nil {
 		log.Fatal(err)
